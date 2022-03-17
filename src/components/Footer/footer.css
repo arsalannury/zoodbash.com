@@ -1,0 +1,16 @@
+.social_icon {
+    font-size: 1.2em;
+    padding: 5px 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 0 #555;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.social_icon:hover {
+    box-shadow: 0 20px 4px  #ddd;
+    color: #1976d2;
+}
+.social_icon:active{
+    box-shadow: 0 20px 4px  #ddd;
+}

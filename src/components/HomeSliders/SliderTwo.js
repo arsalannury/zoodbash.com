@@ -17,8 +17,9 @@ SwiperCore.use([Autoplay])
 function SliderTwo() {
   const [jewerly, setJewerly] = useState([]);
   const [loading, setLoading] = useState(true);
-  useEffect(async () => {
-    const response = await axios
+  useEffect( () => {
+    const responseData = async = () => {
+      const response = await axios
       .get("https://fakestoreapi.com/products/category/jewelery")
       .then((result) => {
         setJewerly(result.data);
@@ -27,6 +28,8 @@ function SliderTwo() {
       .catch((error) => {
         setLoading(true);
       });
+    }
+    responseData()
   }, []);
   return (
     <>

@@ -13,7 +13,8 @@ function SliderOne() {
   const [products, setProducts] = useState([]);
   const [value, setValue] = useState(4);
   const [loading,isLoading] = useState(true)
-  useEffect(async () => {
+  useEffect(() => {
+     const responseData = async () => {
       const response = await axios
       .get("https://fakestoreapi.com/products/category/electronics")
       .then((result) => {
@@ -21,6 +22,8 @@ function SliderOne() {
         isLoading(false)
         console.log(products);
       });
+     }
+     responseData()
   }, []);
 
   return (

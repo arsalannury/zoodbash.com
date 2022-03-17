@@ -1,5 +1,5 @@
 import Home from "./Home/Home";
-import '../Index.css';
+import '../index.css';
 
 const App = () => {
     return ( 

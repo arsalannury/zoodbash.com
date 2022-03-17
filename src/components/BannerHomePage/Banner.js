@@ -32,7 +32,7 @@ function Banner() {
 export default Banner;
 
 const Container = styled(Grid)`
-  background: #eee;
+  background: rgba(0,0,0,0.02);
   margin-top: 150px;
 `;
 

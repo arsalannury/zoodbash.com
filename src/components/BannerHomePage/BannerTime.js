@@ -81,7 +81,7 @@ const Image = styled.img`
 const GridMain = styled(Grid)`
   padding: 50px;
   margin-top: 50px;
-  background: #eee;
+  background: rgba(0,0,0,0.02);
   @media screen and (max-width: 600px) {
     padding: 20px;
   }

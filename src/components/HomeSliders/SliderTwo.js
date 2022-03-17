@@ -18,7 +18,7 @@ function SliderTwo() {
   const [jewerly, setJewerly] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect( () => {
-    const responseData = async = () => {
+    const responseData = async () => {
       const response = await axios
       .get("https://fakestoreapi.com/products/category/jewelery")
       .then((result) => {

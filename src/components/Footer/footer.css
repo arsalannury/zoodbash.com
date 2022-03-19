@@ -8,9 +8,9 @@
 }
 
 .social_icon:hover {
-    box-shadow: 0 20px 4px  #ddd;
+    box-shadow: 0 10px 4px  #ddd;
     color: #1976d2;
 }
 .social_icon:active{
-    box-shadow: 0 20px 4px  #ddd;
+    box-shadow: 0 10px 4px  #ddd;
 }

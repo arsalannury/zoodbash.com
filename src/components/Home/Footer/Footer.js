@@ -220,6 +220,7 @@ const P = styled.p`
 color : #555;
 font-size : .7em;
 margin : 8px 0;
+padding : 5px 20px 5px 5px;
 @media screen and (max-width : 340px) {
   font-size : .6em;
 }
@@ -227,10 +228,13 @@ margin : 8px 0;
 const Div = styled(Grid)`
 padding : 5px;
 `;
-const H3 = styled(H2)``;
+const H3 = styled(H2)`
+padding : 0 20px 0 0;
+`;
 const A = styled(Link)`
 text-decoration : none;
 font-size : .7em;
+padding: 0 20px 0 0; 
 `
 const CopyRight = styled.p`
 border-top : 2px solid #fff;

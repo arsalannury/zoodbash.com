@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Grid, Button } from "@mui/material";
 import styled from "styled-components";
 import axios from "axios";
-import CommentsLoading from "../../Loading/CommentLoading/CommentsLoading";
+import CommentsLoading from "../../../Loading/CommentLoading/CommentsLoading";
 import getCommentsApi from "./GetComments";
 import Slide from 'react-reveal/Slide';
 

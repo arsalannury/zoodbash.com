@@ -11,7 +11,7 @@ import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 import styled from "styled-components";
 import { Grid, Rating } from "@mui/material";
-import SliderOneLoading from "../Loading/SliderOneLoading";
+import SliderOneLoading from "../../Loading/SliderOneLoading";
 SwiperCore.use([Autoplay])
 
 function SliderTwo() {

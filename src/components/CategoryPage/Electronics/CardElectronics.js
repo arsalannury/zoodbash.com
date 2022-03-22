@@ -12,7 +12,7 @@ String.prototype.toPersian = function () {
 function CardElectronics({title,image,price,rating}) {
   return (
     <>
-    <Grid container alignItems={'center'} justifyContent={'center'} item xs={12} sm={12} md={6} lg={6}>
+    <Grid container alignItems={'center'} justifyContent={'center'} item xs={12} sm={6} md={6} lg={6}>
      <Card >
          <LinkImg to={'/'}><Image src={image} /></LinkImg>
          <Title>{title}</Title>

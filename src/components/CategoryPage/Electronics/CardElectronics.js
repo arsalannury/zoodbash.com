@@ -17,13 +17,13 @@ function CardElectronics({title,image,price,rating}) {
          <LinkImg to={'/'}><Image src={image} /></LinkImg>
          <Title>{title}</Title>
          <Div>
-             <Information>
-             <Typography>{price.toString().toPersian()}<Span>هزار تومان</Span></Typography>
+             <Information container alignItems={'center'} justifyContent={'space-between'}>
+             <Typography sx={{fontFamily : 'unset',fontSize : '.8em'}}>{price.toString().toPersian()}<Span>هزار تومان</Span></Typography>
              <Rating name="read-only" value={rating.rate} readOnly />
              </Information>
-             <Typography>نظرات کاربران</Typography>
+             <Typography sx={{margin : '15px 0' , color : '#888' ,fontFamily : 'unset',fontSize : '.7em'}}>نظرات کاربران</Typography>
          </Div>
-         <Footer>
+         <Footer container alignItems={'center'} justifyContent={'flex-end'}>
              <Btn><Link to={'/'}></Link>مشاهده محصول</Btn>
          </Footer>
      </Card>
@@ -37,19 +37,32 @@ export default CardElectronics;
 const Card = styled(Grid)`
 width : 300px;
 padding: 10px;
-box-shadow: 0 0 3px #bbb;
 border-radius: 5px;
+transition : all .5s ease;
+&:hover {
+  box-shadow : 0 2px 1px #aaa;
+}
 `;
 const Image = styled.img`
 width : 90%;
 height : 200px;
 `;
-const Title = styled.p``;
-const Div = styled(Grid)``;
+const Title = styled.p`
+font-size : .8em;
+color : #555;
+`;
+const Div = styled(Grid)`
+margin-top : 10px;
+`;
 const Footer = styled(Grid)``;
-const Btn = styled(Button)``
+const Btn = styled(Button)`
+font-family : unset;
+font-size : .7em;
+`
 const Information = styled(Grid)``;
-const Span = styled.span``;
+const Span = styled.span`
+font-size : .7em;
+`;
 const LinkImg = styled(Link)`
-
+// font-family : unset;
 `

@@ -25,7 +25,7 @@ function Electronics() {
         </Grid>
 
 
-        <Grid item container alignItems={'center'} justifyContent={'space-evenly'} xs={12} sm={12} md={9} lg={9}>
+        <Grid item container alignItems={'center'} justifyContent={'space-evenly'} xs={12} sm={12} md={9} lg={9} sx={{ marginBottom: '15px'}}>
           {category.map((product) => (
             <CardElectronics
               key={product.id}

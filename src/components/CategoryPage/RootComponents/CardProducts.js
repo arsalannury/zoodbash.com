@@ -9,7 +9,7 @@ String.prototype.toPersian = function () {
     });
   };
 
-function CardElectronics({title,image,price,rating}) {
+function CardProducts({title,image,price,rating}) {
   return (
     <>
     <Grid container alignItems={'center'} justifyContent={'center'} item xs={12} sm={6} md={6} lg={6}>
@@ -32,7 +32,7 @@ function CardElectronics({title,image,price,rating}) {
   )
 }
 
-export default CardElectronics;
+export default CardProducts;
 
 const Card = styled(Grid)`
 width : 300px;

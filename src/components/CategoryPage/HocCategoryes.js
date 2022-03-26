@@ -1,27 +1,37 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import CardElectronics from "./Electronics/CardElectronics";
 import { Grid } from "@mui/material";
-import Filter from "./Electronics/Filter";
+import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
-
+import CardProducts from "./RootComponents/CardProducts";
+import FilterProductsMobile from "./RootComponents/FilterProductsMobile";
+import styled from 'styled-components';
 
 function HocCategoryes(props) {
+  const [changeComponent, setChangeComponent] = useState(false);
+  const [category, getCategory] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(props.apiLink);
+      try {
+        getCategory(response.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(true);
+      }
+    };
+    fetchData();
+  }, []);
 
-    const [category, getCategory] = useState([]);
-    const [isLoading, setLoading] = useState(true);
-    useEffect(() => {
-      const fetchData = async () => {
-        const response = await axios.get(props.apiLink );
-        try {
-          getCategory(response.data);
-          setLoading(false);
-        } catch (error) {
-          setLoading(true);
-        }
-      };
-      fetchData();
-    }, []);
+  useEffect(() => {
+    window.innerWidth <= 899 ? setChangeComponent(true) : setChangeComponent(false);
+    window.addEventListener("resize", (e) => {
+      e.target.innerWidth <= 899
+        ? setChangeComponent(true)
+        : setChangeComponent(false);
+    });
+  }, [changeComponent]);
 
   return (
     <>
@@ -30,9 +40,17 @@ function HocCategoryes(props) {
           <CategoryLoading />
         ) : (
           <>
-            <Grid item xs={0} sm={0} md={3} lg={3}>
-              <Filter />
-            </Grid>
+            {!changeComponent ? (
+              <Grid item xs={0} sm={0} md={3} lg={3}>
+                <FilterProducts />
+              </Grid>
+            ) : (
+
+              <FilterSec item xs={12} sm={12}>
+                <FilterProductsMobile />
+              </FilterSec>
+
+            )}
 
             <Grid
               item
@@ -46,7 +64,7 @@ function HocCategoryes(props) {
               sx={{ marginBottom: "15px" }}
             >
               {category.map((product) => (
-                <CardElectronics
+                <CardProducts
                   key={product.id}
                   title={product.title}
                   image={product.image}
@@ -59,7 +77,14 @@ function HocCategoryes(props) {
         )}
       </Grid>
     </>
-  )
+  );
 }
 
-export default HocCategoryes
+export default HocCategoryes;
+
+
+
+
+const FilterSec = styled(Grid)`
+position : relative;
+`

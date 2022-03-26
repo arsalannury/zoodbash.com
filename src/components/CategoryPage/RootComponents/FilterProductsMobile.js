@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 const theme = createTheme({
   components: {
@@ -26,15 +27,21 @@ String.prototype.toPersian = function () {
 };
 
 
-function Filter() {
+function FilterProductsMobile() {
   const [rangeValue, setRangeValue] = useState(0);
-
+  const [filterShow,setFilterShow] = useState('none')
   const rangeHandler = (e) => {
     setRangeValue(e.target.value);
   };
+  const FilterShowHandler = () => {
+      setFilterShow(filterShow === 'none' ? 'flex' : 'none')
+  }
   return (
     <>
-      <Wrapper container flexDirection={"column"} alignItems={"center"}>
+      <Button onClick={FilterShowHandler}>
+          <FilterListIcon />
+      </Button>
+      <Wrapper container flexDirection={"column"} alignItems={"center"} style={{display : filterShow}}>
         <PriceSection>
           <PriceTitle>فیلتر بر اساس قیمت</PriceTitle>
           <RangeContainer
@@ -104,12 +111,13 @@ function Filter() {
   );
 }
 
-export default Filter;
+export default FilterProductsMobile;
 
 const Wrapper = styled(Grid)`
   border-left: 1px solid #ddd;
   width: 100%;
   height: 100%;
+  position : absolute;
 `;
 const PriceSection = styled(Grid)`
   width: 100%;

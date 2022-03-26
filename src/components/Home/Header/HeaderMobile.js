@@ -1,21 +1,26 @@
-import * as React from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
-// import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-// import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import HeaderTheme from "../../../Theme/HeaderTheme";
-import styled from 'styled-components';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import styled from "styled-components";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useState } from "react";
 
 function HeaderMobile() {
-  const [state, setState] = React.useState({
-    left: false,
+  const [state, setState] = useState({
+    right: false,
   });
+  const [displayCategory, setDisplayCategory] = useState("none");
+  const [isDisplayHandle, setDisplayHandle] = useState(false);
+
+  const handleOpenMenu = () => {
+    setDisplayCategory(displayCategory === "none" ? "flex" : "none");
+    setDisplayHandle(isDisplayHandle === false ? true : false);
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -32,68 +37,44 @@ function HeaderMobile() {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* <HeaderTheme>
-        <List>
-          <ListItem button>
-            <ListItemText><MenuLink to={''}>مناقصه</MenuLink></ListItemText>
-          </ListItem>
-          <ListItem button>
-            <ListItemText><MenuLink to={''}>دسته بندی</MenuLink></ListItemText>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemText><MenuLink to={''}>لوازم الکترونیک</MenuLink></ListItemText>
-          </ListItem>
-          <ListItem button>
-            <ListItemText><MenuLink to={''}>جواهرات</MenuLink></ListItemText>
-          </ListItem>
-          <ListItem button>
-            <ListItemText><MenuLink to={''}>لباس مردانه</MenuLink></ListItemText>
-          </ListItem>
-          <ListItem button>
-            <ListItemText><MenuLink to={''}>لباس زنانه</MenuLink></ListItemText>
-          </ListItem>
-
-          <ListItem button>
-            <ListItemText><MenuLink to={''}>درباره ما</MenuLink></ListItemText>
-          </ListItem>
-        </List>
-      </HeaderTheme> */}
-       <List>
-                <ListItem style={{ position: "relative", fontSize: ".9em" }}>
-                 <Span>
-                 <ArrowLeftIcon />
-                 دسته بندی           
-                 </Span>
-                  <CatalogList>
-                    <CatalogItem>
-                      {" "}
-                      <MenuLink to={"/electronics"}> لوازم الترونیک </MenuLink>
-                    </CatalogItem>
-                    <CatalogItem>
-                      {" "}
-                      <MenuLink to={"/jeweleryes"}> جواهرات</MenuLink>
-                    </CatalogItem>
-                    <CatalogItem>
-                      {" "}
-                      <MenuLink to={"/mensClothing"}> لباس مردانه</MenuLink>
-                    </CatalogItem>
-                    <CatalogItem>
-                      {" "}
-                      <MenuLink to={""}> لباس زنانه</MenuLink>
-                    </CatalogItem>
-                  </CatalogList>
-                </ListItem>
-                <ListItem>
-                  <MenuLink to={""}>درباره ما</MenuLink>
-                </ListItem>
-                <ListItem>
-                  <MenuLink to={""}>مناقصه</MenuLink>
-                </ListItem>
-              </List>
+      <List>
+        <ListItem
+          style={{ fontSize: ".9em", padding: "15px 4px " }}
+          onClick={handleOpenMenu}
+        >
+          <Span>
+            {!isDisplayHandle ? <ArrowLeftIcon /> : <ArrowDropDownIcon />}
+            دسته بندی
+          </Span>
+          <CatalogList style={{ display: displayCategory }}>
+            <CatalogItem>
+              {" "}
+              <MenuLink to={"/electronics"}> لوازم الترونیک </MenuLink>
+            </CatalogItem>
+            <CatalogItem>
+              {" "}
+              <MenuLink to={"/jeweleryes"}> جواهرات</MenuLink>
+            </CatalogItem>
+            <CatalogItem>
+              {" "}
+              <MenuLink to={"/mensClothing"}> لباس مردانه</MenuLink>
+            </CatalogItem>
+            <CatalogItem>
+              {" "}
+              <MenuLink to={"/womenClothing"}> لباس زنانه</MenuLink>
+            </CatalogItem>
+          </CatalogList>
+        </ListItem>
+        <ListItem>
+          <MenuLink to={""}>درباره ما</MenuLink>
+        </ListItem>
+        <ListItem>
+          <MenuLink to={""}>مناقصه</MenuLink>
+        </ListItem>
+      </List>
       <Divider />
     </Box>
   );
@@ -121,15 +102,15 @@ function HeaderMobile() {
 export default HeaderMobile;
 
 const MenuLink = styled(Link)`
-color : inherit;
-font-size : .9em;
-text-decoration : inherit;
-font-family : font-sans;
-`
+  color: inherit;
+  font-size: 0.9em;
+  text-decoration: inherit;
+  font-family: font-sans;
+`;
 
 const MenuBtn = styled(Button)`
-color : #444 !important;
-`
+  color: #444 !important;
+`;
 
 const List = styled.ul`
   display: flex;
@@ -143,15 +124,15 @@ const List = styled.ul`
 const ListItem = styled.li`
   cursor: pointer;
   padding: 15px;
-  transition: all 750ms ease;
-  font-family : font-sans;
-  padding: 15px 4px;
+  transition: all 0.5s ease;
+  font-family: font-sans;
 `;
 
 const CatalogList = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  transition: all 0.5s ease;
   justify-content: space-around;
   height: 300px;
   z-index: 1;
@@ -178,8 +159,8 @@ const CatalogItem = styled.li`
 `;
 
 const Span = styled.span`
-font-size: inherit;
-display : flex;
-align-items : center;
-justify-content : space-around;
-`
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;

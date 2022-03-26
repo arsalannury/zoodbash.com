@@ -18,7 +18,9 @@ const Header = () => {
     <>
       <Grid container>
         <Grid item xs={6} sm={6} md={6}>
-          <Image src="zood.png" />
+         <Link to={'/'}>
+         <Image src="zood.png" />
+         </Link>
         </Grid>
         <Grid item xs={6} sm={6} md={6} sx={{textAlign: 'end'}}>
           {!styles ? (
@@ -41,7 +43,7 @@ const Header = () => {
                     </CatalogItem>
                     <CatalogItem>
                       {" "}
-                      <Link to={""}> لباس زنانه</Link>
+                      <Link to={"/womenClothing"}> لباس زنانه</Link>
                     </CatalogItem>
                   </CatalogList>
                 </ListItem>

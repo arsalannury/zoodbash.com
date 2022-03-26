@@ -1,33 +1,33 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import CardElectronics from "./CardElectronics";
+import CardElectronics from "./Electronics/CardElectronics";
 import { Grid } from "@mui/material";
-import Filter from "./Filter";
-import * as URL from "../URL";
-import ElectronicLoading from "../../Loading/Categoryes/CategoryLoading";
-import HocCategoryes from "../HocCategoryes";
+import Filter from "./Electronics/Filter";
+import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 
-function Electronics() {
-  // const [category, getCategory] = useState([]);
-  // const [isLoading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await axios.get(URL.electronics);
-  //     try {
-  //       getCategory(response.data);
-  //       setLoading(false);
-  //     } catch (error) {
-  //       setLoading(true);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+
+function HocCategoryes(props) {
+
+    const [category, getCategory] = useState([]);
+    const [isLoading, setLoading] = useState(true);
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await axios.get(props.apiLink );
+        try {
+          getCategory(response.data);
+          setLoading(false);
+        } catch (error) {
+          setLoading(true);
+        }
+      };
+      fetchData();
+    }, []);
+
   return (
     <>
-    <HocCategoryes apiLink={URL.electronics} />
-      {/* <Grid container>
+      <Grid container>
         {isLoading ? (
-          <ElectronicLoading />
+          <CategoryLoading />
         ) : (
           <>
             <Grid item xs={0} sm={0} md={3} lg={3}>
@@ -57,9 +57,9 @@ function Electronics() {
             </Grid>
           </>
         )}
-      </Grid> */}
+      </Grid>
     </>
-  );
+  )
 }
 
-export default Electronics;
+export default HocCategoryes

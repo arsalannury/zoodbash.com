@@ -44,7 +44,7 @@ function Filter() {
             flexDirection={"column"}
           >
             <ThemeProvider theme={theme}>
-              <Tooltip title={`${rangeValue.toPersian()} هزار تومان`}>
+              <Tooltip title={`${rangeValue.toString().toPersian()} هزار تومان`}>
                 <Range
                   type="range"
                   max={"600"}

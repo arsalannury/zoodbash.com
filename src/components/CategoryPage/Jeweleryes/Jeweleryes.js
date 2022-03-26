@@ -1,9 +1,11 @@
-import Electronics from "../Electronics/Electronics"
+import HocCategoryes from "../HocCategoryes"
+import * as URL from "../URL";
+
 
 function Jeweleryes() {
   return (
     <>
-     <Electronics />
+    <HocCategoryes apiLink={URL.jewelery} />
     </>
   )
 }

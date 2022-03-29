@@ -111,7 +111,7 @@ const CatalogList = styled.ul`
   box-shadow: 0 4px 5px #cdcdcd;
   border-radius: 5px;
   display: none;
-  z-index: 1;
+  z-index: 100;
   background: #fff;
   li {
     color: #000;

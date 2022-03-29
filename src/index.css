@@ -19,3 +19,7 @@
 #Project{
     font-family: font,font-sans;
 }
+
+.body_when_filter_show {
+    overflow: hidden;
+}

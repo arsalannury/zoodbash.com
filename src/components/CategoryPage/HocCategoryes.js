@@ -35,6 +35,7 @@ function HocCategoryes(props) {
 
   return (
     <>
+      {/* <Backdrop> */}
       <Grid container>
         {isLoading ? (
           <CategoryLoading />
@@ -76,6 +77,7 @@ function HocCategoryes(props) {
           </>
         )}
       </Grid>
+      {/* </Backdrop> */}
     </>
   );
 }
@@ -87,4 +89,13 @@ export default HocCategoryes;
 
 const FilterSec = styled(Grid)`
 position : relative;
+`
+const Backdrop = styled.div`
+z-index: 1057;
+width : 100%;
+height : 100%;
+// overflow-x : hidden;
+// overflow-y : auto;
+outline : 0;
+background : rgba(0,0,0,0.70);
 `

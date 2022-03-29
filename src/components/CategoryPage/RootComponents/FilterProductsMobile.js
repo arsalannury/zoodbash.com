@@ -3,7 +3,7 @@ import { Button, Grid } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 const theme = createTheme({
   components: {
@@ -11,8 +11,8 @@ const theme = createTheme({
       styleOverrides: {
         tooltip: {
           background: "#14213d",
-          fontFamily : 'inherit' , 
-          fontSize : '1em'
+          fontFamily: "inherit",
+          fontSize: "1em",
         },
       },
     },
@@ -26,22 +26,36 @@ String.prototype.toPersian = function () {
   });
 };
 
-
 function FilterProductsMobile() {
   const [rangeValue, setRangeValue] = useState(0);
-  const [filterShow,setFilterShow] = useState('none')
+  const [filterShow, setFilterShow] = useState(" translateX(300%)");
+  const [overflowShow, setOverflowShow] = useState(false);
+  const [filterHeight,setFilterHeight] = useState('unset');
   const rangeHandler = (e) => {
     setRangeValue(e.target.value);
   };
   const FilterShowHandler = () => {
-      setFilterShow(filterShow === 'none' ? 'flex' : 'none')
-  }
+    setFilterShow(
+      filterShow === " translateX(300%)" ? " none" : " translateX(300%)"
+    );
+    setFilterHeight(filterHeight === 'unset' ? '100vh' : 'unset');
+    setOverflowShow(overflowShow === false ? true : false);
+    if (!overflowShow) {
+      document.body.classList.add("body_when_filter_show");
+    } else {
+      document.body.classList.remove("body_when_filter_show");
+    }
+  };
   return (
     <>
       <Button onClick={FilterShowHandler}>
-          <FilterListIcon />
+        <FilterListIcon />
       </Button>
-      <Wrapper container flexDirection={"column"} alignItems={"center"} style={{display : filterShow}}>
+      <Wrapper
+        container
+        alignItems={"center"}
+        style={{ transform: filterShow , height: filterHeight }}
+      >
         <PriceSection>
           <PriceTitle>فیلتر بر اساس قیمت</PriceTitle>
           <RangeContainer
@@ -51,7 +65,9 @@ function FilterProductsMobile() {
             flexDirection={"column"}
           >
             <ThemeProvider theme={theme}>
-              <Tooltip title={`${rangeValue.toString().toPersian()} هزار تومان`}>
+              <Tooltip
+                title={`${rangeValue.toString().toPersian()} هزار تومان`}
+              >
                 <Range
                   type="range"
                   max={"600"}
@@ -114,10 +130,11 @@ function FilterProductsMobile() {
 export default FilterProductsMobile;
 
 const Wrapper = styled(Grid)`
-  border-left: 1px solid #ddd;
   width: 100%;
-  height: 100%;
-  position : absolute;
+  position: absolute;
+  background: #fff;
+  z-index: 1;
+  transition: all 0.5s ease;
 `;
 const PriceSection = styled(Grid)`
   width: 100%;
@@ -170,13 +187,13 @@ const Rates = styled(Grid)`
 `;
 
 const FirstStateRates = styled(Grid)`
-padding : 8px;
-border-bottom: 1px solid #eee;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
 `;
 const Flabel = styled.label`
   cursor: pointer;
   font-size: 0.8em;
-  color : #555;
+  color: #555;
 `;
 const Slabel = styled(Flabel)``;
 const Thlabel = styled(Flabel)``;
@@ -215,18 +232,18 @@ const SecondStateRates = styled(FirstStateRates)``;
 const ThirdStateRates = styled(FirstStateRates)``;
 
 const ClearFilters = styled.button`
-border : none;
-outline : none;
-padding : 8px 16px;
-border-radius : 5px;
-background : #14213d;
-color : #fff;
-font-family : unset;
-margin-top : 50px;
-cursor : pointer;
-font-size : .7em;
-transition : all .4s ease;
-&:hover {
-  background : #0077b6;
-}
-`
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background: #14213d;
+  color: #fff;
+  font-family: unset;
+  margin-top: 50px;
+  cursor: pointer;
+  font-size: 0.7em;
+  transition: all 0.4s ease;
+  &:hover {
+    background: #0077b6;
+  }
+`;

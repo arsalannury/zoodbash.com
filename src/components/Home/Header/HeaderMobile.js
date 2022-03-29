@@ -9,6 +9,7 @@ import styled from "styled-components";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useState } from "react";
+import Fade from 'react-reveal/Fade';
 
 function HeaderMobile() {
   const [state, setState] = useState({
@@ -37,8 +38,6 @@ function HeaderMobile() {
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
-      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         <ListItem
@@ -47,9 +46,11 @@ function HeaderMobile() {
         >
           <Span>
             {!isDisplayHandle ? <ArrowLeftIcon /> : <ArrowDropDownIcon />}
-            دسته بندی
+            دسته بندی 
           </Span>
-          <CatalogList style={{ display: displayCategory }}>
+        
+        <CatalogList style={{ display: displayCategory }}>
+        <Fade top>
             <CatalogItem>
               {" "}
               <MenuLink to={"/electronics"}> لوازم الترونیک </MenuLink>
@@ -66,7 +67,9 @@ function HeaderMobile() {
               {" "}
               <MenuLink to={"/womenClothing"}> لباس زنانه</MenuLink>
             </CatalogItem>
+            </Fade>
           </CatalogList>
+       
         </ListItem>
         <ListItem>
           <MenuLink to={""}>درباره ما</MenuLink>
@@ -120,6 +123,7 @@ const List = styled.ul`
   list-style-type: none;
   font-size: 0.9em;
   margin-top: 30px;
+  user-select : none;
 `;
 const ListItem = styled.li`
   cursor: pointer;

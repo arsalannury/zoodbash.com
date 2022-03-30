@@ -11,11 +11,32 @@ function HocCategoryes(props) {
   const [changeComponent, setChangeComponent] = useState(false);
   const [category, getCategory] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [checkboxFilter,setCheckboxFilter] = useState('');
+  const [scoreFilter,setScoreFilter] = useState([]);
+
+  const [oneToTwoFilter,setOneToTwoFilter] = useState(false)
+  const [twoToFourFilter,setTwoToFourFilter] = useState(false)
+  const [maxScoreFilter,setmaxScoreFilter] = useState(false)
+
+  const checkboxFilterHandler = (e) => {
+    setCheckboxFilter(e.target.value);
+  }
+  const checkboxOneToTwo = (e) => {
+    setOneToTwoFilter(e.target.checked)
+  }
+  const checkboxTwoToFour = (e) => {
+    setTwoToFourFilter(e.target.checked)
+  }
+  const checkboxMaxScore = (e) => {
+    setmaxScoreFilter(e.target.checked)
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(props.apiLink);
       try {
-        getCategory(response.data);
+        setScoreFilter(response.data);
+        getCategory(response.data)
         setLoading(false);
       } catch (error) {
         setLoading(true);
@@ -33,9 +54,27 @@ function HocCategoryes(props) {
     });
   }, [changeComponent]);
 
+  useEffect(() => {
+    if(oneToTwoFilter) {
+      setScoreFilter(category.filter(elements => elements.rating.rate <= 2.5))
+    }else if(twoToFourFilter){
+      setScoreFilter(category.filter(elements => elements.rating.rate <= 4 && elements.rating.rate > 2.5 ))
+    } else if(maxScoreFilter){
+      setScoreFilter(category.filter(elements => elements.rating.rate > 4))
+    } else {
+      setScoreFilter(category)
+    }    
+
+    if(oneToTwoFilter && twoToFourFilter && twoToFourFilter) {
+      setScoreFilter( category.filter(elements => elements.rating.rate <= 4))
+    }else if(oneToTwoFilter && maxScoreFilter) {
+      setScoreFilter(category)
+    }
+
+  },[oneToTwoFilter,twoToFourFilter,maxScoreFilter])
+
   return (
     <>
-      {/* <Backdrop> */}
       <Grid container>
         {isLoading ? (
           <CategoryLoading />
@@ -43,7 +82,16 @@ function HocCategoryes(props) {
           <>
             {!changeComponent ? (
               <Grid item xs={0} sm={0} md={3} lg={3}>
-                <FilterProducts />
+                <FilterProducts
+                 checkboxFilter={checkboxFilter}
+                 checkboxFilterHandler={checkboxFilterHandler}
+                 checkboxOneToTwo={checkboxOneToTwo}
+                 checkboxTwoToFour={checkboxTwoToFour}
+                 checkboxMaxScore={checkboxMaxScore}
+                 oneToTwoFilter={oneToTwoFilter}
+                 twoToFourFilter={twoToFourFilter}
+                 maxScoreFilter={maxScoreFilter}
+                 />
               </Grid>
             ) : (
 
@@ -64,7 +112,7 @@ function HocCategoryes(props) {
               lg={9}
               sx={{ marginBottom: "15px" }}
             >
-              {category.map((product) => (
+              {scoreFilter.map((product) => (
                 <CardProducts
                   key={product.id}
                   title={product.title}
@@ -77,7 +125,6 @@ function HocCategoryes(props) {
           </>
         )}
       </Grid>
-      {/* </Backdrop> */}
     </>
   );
 }

@@ -26,7 +26,9 @@ String.prototype.toPersian = function () {
 };
 
 
-function FilterProducts() {
+function FilterProducts({checkboxFilter , checkboxFilterHandler , checkboxOneToTwo , checkboxTwoToFour , checkboxMaxScore
+, oneToTwoFilter , twoToFourFilter , maxScoreFilter
+}) {
   const [rangeValue, setRangeValue] = useState(0);
 
   const rangeHandler = (e) => {
@@ -78,7 +80,7 @@ function FilterProducts() {
               justifyContent={"space-between"}
             >
               <Flabel htmlFor={"check1"}>امتیاز دو و کمتر</Flabel>
-              <FcheckBox type={"checkbox"} id="check1" />
+              <FcheckBox type={"checkbox"} id="check1" value="onetotwo" defaultchecked={oneToTwoFilter} onChange={checkboxOneToTwo} />
             </FirstStateRates>
             <SecondStateRates
               container
@@ -86,7 +88,7 @@ function FilterProducts() {
               justifyContent={"space-between"}
             >
               <Slabel htmlFor={"check2"}>امتیاز دو تا چهار</Slabel>
-              <ScheckBox type={"checkbox"} id="check2" />
+              <ScheckBox type={"checkbox"} id="check2" value="twotofour" defaultchecked={twoToFourFilter} onChange={checkboxTwoToFour}  />
             </SecondStateRates>
             <ThirdStateRates
               container
@@ -94,7 +96,7 @@ function FilterProducts() {
               justifyContent={"space-between"}
             >
               <Thlabel htmlFor={"check3"}>بیشترین امتیاز</Thlabel>
-              <ThcheckBox type={"checkbox"} id="check3" />
+              <ThcheckBox type={"checkbox"} id="check3" value="maxscore" defaultchecked={maxScoreFilter} onChange={checkboxMaxScore}  />
             </ThirdStateRates>
           </Rates>
         </RateSection>

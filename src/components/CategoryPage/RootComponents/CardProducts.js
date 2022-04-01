@@ -1,15 +1,16 @@
 import {Button,Grid,Typography,Rating} from '@mui/material';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import {useEffect} from 'react';
+import { EnglishNumberToPersian } from '../../ToPersian/EnglishNumberToPersian';
 
-String.prototype.toPersian = function () {
-    let num = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۰"];
-    return this.replace(/[0-9]/g, function (number) {
-      return num[+number];
-    });
-  };
 
 function CardProducts({title,image,price,rating}) {
+
+  useEffect(() => {
+   EnglishNumberToPersian()
+  },[])
+
   return (
     <>
     <Grid container alignItems={'center'} justifyContent={'center'} item xs={12} sm={6} md={6} lg={6}>

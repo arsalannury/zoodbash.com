@@ -5,39 +5,34 @@ import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
 import FilterProductsMobile from "./RootComponents/FilterProductsMobile";
-import styled from 'styled-components';
-
+import styled from "styled-components";
 
 function HocCategoryes(props) {
   const [changeComponent, setChangeComponent] = useState(false);
   const [category, getCategory] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [checkboxFilter,setCheckboxFilter] = useState('');
-  const [scoreFilter,setScoreFilter] = useState([]);
+  const [scoreFilter, setScoreFilter] = useState([]);
 
-  const [oneToTwoFilter,setOneToTwoFilter] = useState(false)
-  const [twoToFourFilter,setTwoToFourFilter] = useState(false)
-  const [maxScoreFilter,setmaxScoreFilter] = useState(false)
+  const [oneToTwoFilter, setOneToTwoFilter] = useState(false);
+  const [twoToFourFilter, setTwoToFourFilter] = useState(false);
+  const [maxScoreFilter, setmaxScoreFilter] = useState(false);
 
-  const checkboxFilterHandler = (e) => {
-    setCheckboxFilter(e.target.value);
-  }
   const checkboxOneToTwo = (e) => {
-    setOneToTwoFilter(e.target.checked)
-  }
+    setOneToTwoFilter(e.target.checked);
+  };
   const checkboxTwoToFour = (e) => {
-    setTwoToFourFilter(e.target.checked)
-  }
+    setTwoToFourFilter(e.target.checked);
+  };
   const checkboxMaxScore = (e) => {
-    setmaxScoreFilter(e.target.checked)
-  }
+    setmaxScoreFilter(e.target.checked);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(props.apiLink);
       try {
         setScoreFilter(response.data);
-        getCategory(response.data)
+        getCategory(response.data);
         setLoading(false);
       } catch (error) {
         setLoading(true);
@@ -47,7 +42,9 @@ function HocCategoryes(props) {
   }, []);
 
   useEffect(() => {
-    window.innerWidth <= 899 ? setChangeComponent(true) : setChangeComponent(false);
+    window.innerWidth <= 899
+      ? setChangeComponent(true)
+      : setChangeComponent(false);
     window.addEventListener("resize", (e) => {
       e.target.innerWidth <= 899
         ? setChangeComponent(true)
@@ -56,28 +53,37 @@ function HocCategoryes(props) {
   }, [changeComponent]);
 
   useEffect(() => {
-    if(oneToTwoFilter) {
-      setScoreFilter(category.filter(elements => elements.rating.rate <= 2.5))
-    }else if(twoToFourFilter){
-      setScoreFilter(category.filter(elements => elements.rating.rate <= 4 && elements.rating.rate > 2.5 ))
-    } else if(maxScoreFilter){
-      setScoreFilter(category.filter(elements => elements.rating.rate > 4))
+    if (oneToTwoFilter) {
+      setScoreFilter(
+        category.filter((elements) => elements.rating.rate <= 2.5)
+      );
+    } else if (twoToFourFilter) {
+      setScoreFilter(
+        category.filter(
+          (elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5
+        )
+      );
+    } else if (maxScoreFilter) {
+      setScoreFilter(category.filter((elements) => elements.rating.rate > 4));
     } else {
-      setScoreFilter(category)
-    }    
-
-    if(oneToTwoFilter && twoToFourFilter) {
-      setScoreFilter( category.filter(elements => elements.rating.rate <= 4))
-    }else if(oneToTwoFilter && maxScoreFilter) {
-      setScoreFilter(category.filter(elements => elements.rating.rate > 4 || elements.rating.rate < 2.5 ))
-    }else if(twoToFourFilter && maxScoreFilter) {
-      setScoreFilter(category.filter(elements => elements.rating.rate > 2.5))
-    }
-     if(oneToTwoFilter && twoToFourFilter && maxScoreFilter) {
-      setScoreFilter(category)
+      setScoreFilter(category);
     }
 
-  },[oneToTwoFilter,twoToFourFilter,maxScoreFilter])
+    if (oneToTwoFilter && twoToFourFilter) {
+      setScoreFilter(category.filter((elements) => elements.rating.rate <= 4));
+    } else if (oneToTwoFilter && maxScoreFilter) {
+      setScoreFilter(
+        category.filter(
+          (elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5
+        )
+      );
+    } else if (twoToFourFilter && maxScoreFilter) {
+      setScoreFilter(category.filter((elements) => elements.rating.rate > 2.5));
+    }
+    if (oneToTwoFilter && twoToFourFilter && maxScoreFilter) {
+      setScoreFilter(category);
+    }
+  }, [oneToTwoFilter, twoToFourFilter, maxScoreFilter]);
 
   return (
     <>
@@ -87,19 +93,23 @@ function HocCategoryes(props) {
         ) : (
           <>
             {/* {!changeComponent ? ( */}
-              <Grid item xs={0} sm={0} md={3} lg={3} sx={{position : 'relative'}}>
-             
-                <FilterProducts
-                 checkboxFilter={checkboxFilter}
-                 checkboxFilterHandler={checkboxFilterHandler}
-                 checkboxOneToTwo={checkboxOneToTwo}
-                 checkboxTwoToFour={checkboxTwoToFour}
-                 checkboxMaxScore={checkboxMaxScore}
-                 oneToTwoFilter={oneToTwoFilter}
-                 twoToFourFilter={twoToFourFilter}
-                 maxScoreFilter={maxScoreFilter}
-                 />
-              </Grid>
+            <Grid
+              item
+              xs={0}
+              sm={0}
+              md={3}
+              lg={3}
+              sx={{ position: "relative" }}
+            >
+              <FilterProducts
+                checkboxOneToTwo={checkboxOneToTwo}
+                checkboxTwoToFour={checkboxTwoToFour}
+                checkboxMaxScore={checkboxMaxScore}
+                oneToTwoFilter={oneToTwoFilter}
+                twoToFourFilter={twoToFourFilter}
+                maxScoreFilter={maxScoreFilter}
+              />
+            </Grid>
             {/* ) : (
 
               <FilterSec item xs={12} sm={12}>
@@ -138,9 +148,6 @@ function HocCategoryes(props) {
 
 export default HocCategoryes;
 
-
-
-
 const FilterSec = styled(Grid)`
-position : relative;
-`
+  position: relative;
+`;

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { useTimer } from "react-timer-hook";
+import {EnglishNumberToPersian} from '../../ToPersian/EnglishNumberToPersian';
 
 function MyTimer({ expiryTimestamp }) {
   const { seconds, minutes, hours, days, pause } = useTimer({
@@ -9,16 +10,14 @@ function MyTimer({ expiryTimestamp }) {
     onExpire: () => console.warn("onExpire called"),
   });
 
-  String.prototype.toPersian = function () {
-    let num = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۰"];
-    return this.replace(/[0-9]/g, function (number) {
-      return num[+number];
-    });
-  };
-
   const show = (localTime) => {
     return localTime.toString().toPersian();
   };
+
+
+  useEffect(() => {
+   EnglishNumberToPersian();
+  },[])
 
   return (
     <>

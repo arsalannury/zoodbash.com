@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { Grid } from "@mui/material";
+import { Grid, Button } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 const theme = createTheme({
   components: {
@@ -10,8 +11,8 @@ const theme = createTheme({
       styleOverrides: {
         tooltip: {
           background: "#14213d",
-          fontFamily : 'inherit' , 
-          fontSize : '1em'
+          fontFamily: "inherit",
+          fontSize: "1em",
         },
       },
     },
@@ -25,18 +26,80 @@ String.prototype.toPersian = function () {
   });
 };
 
-
-function FilterProducts({checkboxFilter , checkboxFilterHandler , checkboxOneToTwo , checkboxTwoToFour , checkboxMaxScore
-, oneToTwoFilter , twoToFourFilter , maxScoreFilter
+function FilterProducts({
+  checkboxFilter,
+  checkboxFilterHandler,
+  checkboxOneToTwo,
+  checkboxTwoToFour,
+  checkboxMaxScore,
+  oneToTwoFilter,
+  twoToFourFilter,
+  maxScoreFilter,
 }) {
   const [rangeValue, setRangeValue] = useState(0);
+  const [filterShow, setFilterShow] = useState("translateX(300%)");
+  const [overflowShow, setOverflowShow] = useState(false);
+  const [filterHeight, setFilterHeight] = useState("unset");
+  const [positionFilter, setPositionFilter] = useState("unset");
+  const [widthFilter, setWidthFilter] = useState("unset");
+
+  const FilterShowHandler = () => {
+    setFilterShow(
+      filterShow === "translateX(300%)" ? "none" : "translateX(300%)"
+    );
+    setFilterHeight(filterHeight === "unset" ? "100vh" : "unset");
+    setOverflowShow(overflowShow === false ? true : false);
+    if (!overflowShow) {
+      document.body.classList.add("body_when_filter_show");
+    } else {
+      document.body.classList.remove("body_when_filter_show");
+    }
+  };
 
   const rangeHandler = (e) => {
     setRangeValue(e.target.value);
   };
+
+  useEffect(() => {
+    // window.innerWidth <= 899 ? setChangeComponent(true) : setChangeComponent(false);
+    // if(window.innerWidth <= 899 ){
+    //   setPositionFilter("absolute");
+    //     setFilterShow("translateX(300%)");
+    //     setWidthFilter('100vw')
+    // }else{
+    //   setPositionFilter("unset");
+    //   setFilterShow("none");
+    //   setWidthFilter('unset')
+    // }
+    window.addEventListener("resize", (e) => {
+      if (e.target.innerWidth <= 899) {
+        setPositionFilter("absolute");
+        setFilterShow("translateX(300%)");
+        setWidthFilter('100vw')
+      } else {
+        setPositionFilter("unset");
+        setFilterShow("none");
+        setWidthFilter('unset')
+      }
+    });
+  }, []);
+
   return (
     <>
-      <Wrapper container flexDirection={"column"} alignItems={"center"}>
+      <ButtonFilter onClick={FilterShowHandler}>
+        <FilterListIcon />
+      </ButtonFilter>
+      <Wrapper
+        container
+        flexDirection={"column"}
+        alignItems={"center"}
+        style={{
+          transform: filterShow,
+          height: filterHeight,
+          position: positionFilter,
+          width: widthFilter
+        }}
+      >
         <PriceSection>
           <PriceTitle>فیلتر بر اساس قیمت</PriceTitle>
           <RangeContainer
@@ -46,7 +109,9 @@ function FilterProducts({checkboxFilter , checkboxFilterHandler , checkboxOneToT
             flexDirection={"column"}
           >
             <ThemeProvider theme={theme}>
-              <Tooltip title={`${rangeValue.toString().toPersian()} هزار تومان`}>
+              <Tooltip
+                title={`${rangeValue.toString().toPersian()} هزار تومان`}
+              >
                 <Range
                   type="range"
                   max={"600"}
@@ -80,7 +145,13 @@ function FilterProducts({checkboxFilter , checkboxFilterHandler , checkboxOneToT
               justifyContent={"space-between"}
             >
               <Flabel htmlFor={"check1"}>امتیاز دو و کمتر</Flabel>
-              <FcheckBox type={"checkbox"} id="check1" value="onetotwo" defaultchecked={oneToTwoFilter} onChange={checkboxOneToTwo} />
+              <FcheckBox
+                type={"checkbox"}
+                id="check1"
+                value="onetotwo"
+                defaultchecked={oneToTwoFilter}
+                onChange={checkboxOneToTwo}
+              />
             </FirstStateRates>
             <SecondStateRates
               container
@@ -88,7 +159,13 @@ function FilterProducts({checkboxFilter , checkboxFilterHandler , checkboxOneToT
               justifyContent={"space-between"}
             >
               <Slabel htmlFor={"check2"}>امتیاز دو تا چهار</Slabel>
-              <ScheckBox type={"checkbox"} id="check2" value="twotofour" defaultchecked={twoToFourFilter} onChange={checkboxTwoToFour}  />
+              <ScheckBox
+                type={"checkbox"}
+                id="check2"
+                value="twotofour"
+                defaultchecked={twoToFourFilter}
+                onChange={checkboxTwoToFour}
+              />
             </SecondStateRates>
             <ThirdStateRates
               container
@@ -96,7 +173,13 @@ function FilterProducts({checkboxFilter , checkboxFilterHandler , checkboxOneToT
               justifyContent={"space-between"}
             >
               <Thlabel htmlFor={"check3"}>بیشترین امتیاز</Thlabel>
-              <ThcheckBox type={"checkbox"} id="check3" value="maxscore" defaultchecked={maxScoreFilter} onChange={checkboxMaxScore}  />
+              <ThcheckBox
+                type={"checkbox"}
+                id="check3"
+                value="maxscore"
+                defaultchecked={maxScoreFilter}
+                onChange={checkboxMaxScore}
+              />
             </ThirdStateRates>
           </Rates>
         </RateSection>
@@ -112,6 +195,8 @@ const Wrapper = styled(Grid)`
   border-left: 1px solid #ddd;
   width: 100%;
   height: 100%;
+  background: #fff;
+  z-index: 100;
 `;
 const PriceSection = styled(Grid)`
   width: 100%;
@@ -164,13 +249,13 @@ const Rates = styled(Grid)`
 `;
 
 const FirstStateRates = styled(Grid)`
-padding : 8px;
-border-bottom: 1px solid #eee;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
 `;
 const Flabel = styled.label`
   cursor: pointer;
   font-size: 0.8em;
-  color : #555;
+  color: #555;
 `;
 const Slabel = styled(Flabel)``;
 const Thlabel = styled(Flabel)``;
@@ -209,18 +294,25 @@ const SecondStateRates = styled(FirstStateRates)``;
 const ThirdStateRates = styled(FirstStateRates)``;
 
 const ClearFilters = styled.button`
-border : none;
-outline : none;
-padding : 8px 16px;
-border-radius : 5px;
-background : #14213d;
-color : #fff;
-font-family : unset;
-margin-top : 50px;
-cursor : pointer;
-font-size : .7em;
-transition : all .4s ease;
-&:hover {
-  background : #0077b6;
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background: #14213d;
+  color: #fff;
+  font-family: unset;
+  margin-top: 50px;
+  cursor: pointer;
+  font-size: 0.7em;
+  transition: all 0.4s ease;
+  &:hover {
+    background: #0077b6;
+  }
+`;
+
+const ButtonFilter = styled(Button)`
+display : none;
+@media screen and (max-width : 899px) {
+  display : unset;
 }
 `

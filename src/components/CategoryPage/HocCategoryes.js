@@ -7,6 +7,7 @@ import CardProducts from "./RootComponents/CardProducts";
 import FilterProductsMobile from "./RootComponents/FilterProductsMobile";
 import styled from 'styled-components';
 
+
 function HocCategoryes(props) {
   const [changeComponent, setChangeComponent] = useState(false);
   const [category, getCategory] = useState([]);
@@ -65,9 +66,14 @@ function HocCategoryes(props) {
       setScoreFilter(category)
     }    
 
-    if(oneToTwoFilter && twoToFourFilter && twoToFourFilter) {
+    if(oneToTwoFilter && twoToFourFilter) {
       setScoreFilter( category.filter(elements => elements.rating.rate <= 4))
     }else if(oneToTwoFilter && maxScoreFilter) {
+      setScoreFilter(category.filter(elements => elements.rating.rate > 4 || elements.rating.rate < 2.5 ))
+    }else if(twoToFourFilter && maxScoreFilter) {
+      setScoreFilter(category.filter(elements => elements.rating.rate > 2.5))
+    }
+     if(oneToTwoFilter && twoToFourFilter && maxScoreFilter) {
       setScoreFilter(category)
     }
 
@@ -80,8 +86,9 @@ function HocCategoryes(props) {
           <CategoryLoading />
         ) : (
           <>
-            {!changeComponent ? (
-              <Grid item xs={0} sm={0} md={3} lg={3}>
+            {/* {!changeComponent ? ( */}
+              <Grid item xs={0} sm={0} md={3} lg={3} sx={{position : 'relative'}}>
+             
                 <FilterProducts
                  checkboxFilter={checkboxFilter}
                  checkboxFilterHandler={checkboxFilterHandler}
@@ -93,13 +100,13 @@ function HocCategoryes(props) {
                  maxScoreFilter={maxScoreFilter}
                  />
               </Grid>
-            ) : (
+            {/* ) : (
 
               <FilterSec item xs={12} sm={12}>
                 <FilterProductsMobile />
               </FilterSec>
 
-            )}
+            )} */}
 
             <Grid
               item
@@ -136,13 +143,4 @@ export default HocCategoryes;
 
 const FilterSec = styled(Grid)`
 position : relative;
-`
-const Backdrop = styled.div`
-z-index: 1057;
-width : 100%;
-height : 100%;
-// overflow-x : hidden;
-// overflow-y : auto;
-outline : 0;
-background : rgba(0,0,0,0.70);
 `

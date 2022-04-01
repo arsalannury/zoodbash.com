@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Grid } from "@mui/material";
 import { useTimer } from "react-timer-hook";

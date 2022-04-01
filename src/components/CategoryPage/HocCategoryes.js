@@ -6,16 +6,19 @@ import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
 import FilterProductsMobile from "./RootComponents/FilterProductsMobile";
 import styled from "styled-components";
+import { EnglishNumberToPersian } from "../ToPersian/EnglishNumberToPersian";
+
 
 function HocCategoryes(props) {
   const [changeComponent, setChangeComponent] = useState(false);
   const [category, getCategory] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [scoreFilter, setScoreFilter] = useState([]);
-
   const [oneToTwoFilter, setOneToTwoFilter] = useState(false);
   const [twoToFourFilter, setTwoToFourFilter] = useState(false);
   const [maxScoreFilter, setmaxScoreFilter] = useState(false);
+  const [rangeFilter,setRangeFilter] = useState(0);
+  const [priceFilter,setPriceFilter] = useState([]);
 
   const checkboxOneToTwo = (e) => {
     setOneToTwoFilter(e.target.checked);
@@ -26,6 +29,15 @@ function HocCategoryes(props) {
   const checkboxMaxScore = (e) => {
     setmaxScoreFilter(e.target.checked);
   };
+
+  const rangeOnInputHandler = (e) => {
+    setRangeFilter(e.target.value.toString().toPersian());
+    setScoreFilter(category.filter(elements => elements.price <= e.target.value))
+  }
+
+  useEffect(() => {
+   EnglishNumberToPersian()
+  },[])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -108,6 +120,8 @@ function HocCategoryes(props) {
                 oneToTwoFilter={oneToTwoFilter}
                 twoToFourFilter={twoToFourFilter}
                 maxScoreFilter={maxScoreFilter}
+                rangeOnInputHandler={rangeOnInputHandler}
+                rangeFilter={rangeFilter}
               />
             </Grid>
             {/* ) : (

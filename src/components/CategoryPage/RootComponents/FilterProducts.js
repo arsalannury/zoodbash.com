@@ -49,6 +49,7 @@ function FilterProducts({
   oneToTwoFilter,
   twoToFourFilter,
   maxScoreFilter,
+  rangeOnInputHandler
 }) {
   const [rangeValue, setRangeValue] = useState(0);
   const [filterShow, setFilterShow] = useState("translateX(300%)");
@@ -75,6 +76,8 @@ function FilterProducts({
   const rangeHandler = (e) => {
     setRangeValue(e.target.value);
   };
+
+  
 
   return (
     <>
@@ -115,6 +118,7 @@ function FilterProducts({
                   max={"600"}
                   defaultvalue="0"
                   onChange={rangeHandler}
+                  onInput={rangeOnInputHandler}
                 />
               </Tooltip>
             </ThemeProvider>

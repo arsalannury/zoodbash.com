@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Grid , Typography } from "@mui/material";
 import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
@@ -31,8 +31,9 @@ function HocCategoryes(props) {
   };
 
   const rangeOnInputHandler = (e) => {
-    setRangeFilter(e.target.value.toString().toPersian());
+    // setRangeFilter(e.target.value.toString().toPersian());
     setScoreFilter(category.filter(elements => elements.price <= e.target.value))
+    console.log(scoreFilter , scoreFilter.length)
   }
 
   useEffect(() => {
@@ -143,14 +144,23 @@ function HocCategoryes(props) {
               lg={9}
               sx={{ marginBottom: "15px" }}
             >
-              {scoreFilter.map((product) => (
-                <CardProducts
+
+
+
+              {scoreFilter.length === 0 ? (
+                <Typography color={'#14213d'} fontFamily={"unset"} fontSize={'.9em'}>
+                                 محصولی برای نمایش وجود ندارد                        
+                </Typography>
+              ) : (
+                scoreFilter.map((product) => (
+                  <CardProducts
                   key={product.id}
                   title={product.title}
                   image={product.image}
                   price={product.price}
                   rating={product.rating}
                 />
+                )
               ))}
             </Grid>
           </>

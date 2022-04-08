@@ -4,13 +4,11 @@ import { Grid , Typography } from "@mui/material";
 import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
-import FilterProductsMobile from "./RootComponents/FilterProductsMobile";
 import styled from "styled-components";
 import { EnglishNumberToPersian } from "../ToPersian/EnglishNumberToPersian";
 
 
 function HocCategoryes(props) {
-  const [changeComponent, setChangeComponent] = useState(false);
   const [category, getCategory] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [scoreFilter, setScoreFilter] = useState([]);
@@ -18,7 +16,7 @@ function HocCategoryes(props) {
   const [twoToFourFilter, setTwoToFourFilter] = useState(false);
   const [maxScoreFilter, setmaxScoreFilter] = useState(false);
   const [rangeFilter,setRangeFilter] = useState(0);
-  const [priceFilter,setPriceFilter] = useState([]);
+
 
   const checkboxOneToTwo = (e) => {
     setOneToTwoFilter(e.target.checked);
@@ -31,9 +29,17 @@ function HocCategoryes(props) {
   };
 
   const rangeOnInputHandler = (e) => {
-    // setRangeFilter(e.target.value.toString().toPersian());
-    setScoreFilter(category.filter(elements => elements.price <= e.target.value))
-    console.log(scoreFilter , scoreFilter.length)
+    // setRangeFilter(category.filter(elements => elements.price <= e.target.value));
+    if(!oneToTwoFilter && !twoToFourFilter && !maxScoreFilter) {
+      setScoreFilter(category.filter(elements => elements.price <= e.target.value))
+    }else {
+      if(scoreFilter.find(elements => elements.price <= e.target.value)){
+        setScoreFilter(scoreFilter.filter(elements => elements.price <= e.target.value))
+      }else{
+        setScoreFilter([...scoreFilter])
+      }
+    }
+   
   }
 
   useEffect(() => {
@@ -53,17 +59,6 @@ function HocCategoryes(props) {
     };
     fetchData();
   }, []);
-
-  useEffect(() => {
-    window.innerWidth <= 899
-      ? setChangeComponent(true)
-      : setChangeComponent(false);
-    window.addEventListener("resize", (e) => {
-      e.target.innerWidth <= 899
-        ? setChangeComponent(true)
-        : setChangeComponent(false);
-    });
-  }, [changeComponent]);
 
   useEffect(() => {
     if (oneToTwoFilter) {
@@ -105,7 +100,7 @@ function HocCategoryes(props) {
           <CategoryLoading />
         ) : (
           <>
-            {/* {!changeComponent ? ( */}
+
             <Grid
               item
               xs={0}
@@ -125,13 +120,6 @@ function HocCategoryes(props) {
                 rangeFilter={rangeFilter}
               />
             </Grid>
-            {/* ) : (
-
-              <FilterSec item xs={12} sm={12}>
-                <FilterProductsMobile />
-              </FilterSec>
-
-            )} */}
 
             <Grid
               item
@@ -145,11 +133,9 @@ function HocCategoryes(props) {
               sx={{ marginBottom: "15px" }}
             >
 
-
-
               {scoreFilter.length === 0 ? (
                 <Typography color={'#14213d'} fontFamily={"unset"} fontSize={'.9em'}>
-                                 محصولی برای نمایش وجود ندارد                        
+               محصولی برای نمایش وجود ندارد                        
                 </Typography>
               ) : (
                 scoreFilter.map((product) => (

@@ -15,7 +15,7 @@ function HocCategoryes(props) {
   const [oneToTwoFilter, setOneToTwoFilter] = useState(false);
   const [twoToFourFilter, setTwoToFourFilter] = useState(false);
   const [maxScoreFilter, setmaxScoreFilter] = useState(false);
-  const [rangeFilter,setRangeFilter] = useState(0);
+  const [rangeFilter,setRangeFilter] = useState([]);
 
 
   const checkboxOneToTwo = (e) => {
@@ -29,12 +29,14 @@ function HocCategoryes(props) {
   };
 
   const rangeOnInputHandler = (e) => {
-    // setRangeFilter(category.filter(elements => elements.price <= e.target.value));
+    // handle filter products with price range 
+    // handle in two state . first is when score filter is off
+    // and second is when user enable score filter
     if(!oneToTwoFilter && !twoToFourFilter && !maxScoreFilter) {
       setScoreFilter(category.filter(elements => elements.price <= e.target.value))
     }else {
       if(scoreFilter.find(elements => elements.price <= e.target.value)){
-        setScoreFilter(scoreFilter.filter(elements => elements.price <= e.target.value))
+        setScoreFilter(rangeFilter.filter(elements => elements.price <= e.target.value))
       }else{
         setScoreFilter([...scoreFilter])
       }
@@ -61,35 +63,36 @@ function HocCategoryes(props) {
   }, []);
 
   useEffect(() => {
+
+    // range filter save for us the last state after we use score filter and we use that when price filter start change
+    // this useEffect handle score filter in all situation
     if (oneToTwoFilter) {
-      setScoreFilter(
-        category.filter((elements) => elements.rating.rate <= 2.5)
-      );
+      setScoreFilter(category.filter((elements) => elements.rating.rate <= 2.5));
+      setRangeFilter(category.filter((elements) => elements.rating.rate <= 2.5))
     } else if (twoToFourFilter) {
-      setScoreFilter(
-        category.filter(
-          (elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5
-        )
-      );
+      setScoreFilter(category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
+      setRangeFilter( category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5))
     } else if (maxScoreFilter) {
       setScoreFilter(category.filter((elements) => elements.rating.rate > 4));
+      setRangeFilter(category.filter((elements) => elements.rating.rate > 4))
     } else {
       setScoreFilter(category);
+      setRangeFilter(category)
     }
 
     if (oneToTwoFilter && twoToFourFilter) {
       setScoreFilter(category.filter((elements) => elements.rating.rate <= 4));
+      setRangeFilter(category.filter((elements) => elements.rating.rate <= 4))
     } else if (oneToTwoFilter && maxScoreFilter) {
-      setScoreFilter(
-        category.filter(
-          (elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5
-        )
-      );
+      setScoreFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
+      setRangeFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5))
     } else if (twoToFourFilter && maxScoreFilter) {
       setScoreFilter(category.filter((elements) => elements.rating.rate > 2.5));
+      setRangeFilter(category.filter((elements) => elements.rating.rate > 2.5))
     }
     if (oneToTwoFilter && twoToFourFilter && maxScoreFilter) {
       setScoreFilter(category);
+      setRangeFilter(category)
     }
   }, [oneToTwoFilter, twoToFourFilter, maxScoreFilter]);
 
@@ -132,7 +135,7 @@ function HocCategoryes(props) {
               lg={9}
               sx={{ marginBottom: "15px" }}
             >
-
+              {/* when we don't have any products to show in page update with this message */}
               {scoreFilter.length === 0 ? (
                 <Typography color={'#14213d'} fontFamily={"unset"} fontSize={'.9em'}>
                محصولی برای نمایش وجود ندارد                        

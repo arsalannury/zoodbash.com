@@ -5,6 +5,7 @@ export const Wrapper = styled(Grid)`
   border-left: 1px solid #ddd;
   background: #fff;
   z-index: 100;
+  // transition: all .5s ease;
 `;
 export const PriceSection = styled(Grid)`
   width: 100%;

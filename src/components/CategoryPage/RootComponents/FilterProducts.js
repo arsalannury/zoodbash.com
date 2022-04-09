@@ -49,7 +49,8 @@ function FilterProducts({
   oneToTwoFilter,
   twoToFourFilter,
   maxScoreFilter,
-  rangeOnInputHandler
+  rangeOnInputHandler,
+  clearAllFilter
 }) {
   const [rangeValue, setRangeValue] = useState(0);
   const [filterShow, setFilterShow] = useState("translateX(300%)");
@@ -185,7 +186,7 @@ function FilterProducts({
             </ThirdStateRates>
           </Rates>
         </RateSection>
-        <ClearFilters>حذف تمام فیلتر ها</ClearFilters>
+        <ClearFilters onClick={clearAllFilter}>حذف تمام فیلتر ها</ClearFilters>
       </Wrapper>
     </>
   );

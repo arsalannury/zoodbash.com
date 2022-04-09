@@ -4,7 +4,6 @@ import { Grid , Typography } from "@mui/material";
 import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
-import styled from "styled-components";
 import { EnglishNumberToPersian } from "../ToPersian/EnglishNumberToPersian";
 
 
@@ -42,6 +41,10 @@ function HocCategoryes(props) {
       }
     }
    
+  }
+
+  const clearAllFilter = () => {
+    setOneToTwoFilter(false)
   }
 
   useEffect(() => {
@@ -121,6 +124,7 @@ function HocCategoryes(props) {
                 maxScoreFilter={maxScoreFilter}
                 rangeOnInputHandler={rangeOnInputHandler}
                 rangeFilter={rangeFilter}
+                clearAllFilter={clearAllFilter}
               />
             </Grid>
 
@@ -160,7 +164,3 @@ function HocCategoryes(props) {
 }
 
 export default HocCategoryes;
-
-const FilterSec = styled(Grid)`
-  position: relative;
-`;

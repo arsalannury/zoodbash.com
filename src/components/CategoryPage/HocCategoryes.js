@@ -15,7 +15,8 @@ function HocCategoryes(props) {
   const [twoToFourFilter, setTwoToFourFilter] = useState(false);
   const [maxScoreFilter, setmaxScoreFilter] = useState(false);
   const [rangeFilter,setRangeFilter] = useState([]);
-
+  const [isPriceFilter,setIsPriceFilter] = useState(false)
+  const [helperFilter,setHelperFilter] = useState([])
 
   const checkboxOneToTwo = (e) => {
     setOneToTwoFilter(e.target.checked);
@@ -31,6 +32,8 @@ function HocCategoryes(props) {
     // handle filter products with price range 
     // handle in two state . first is when score filter is off
     // and second is when user enable score filter
+    setIsPriceFilter(true)
+    setHelperFilter(category.filter(elements => elements.price <= e.target.value))
     if(!oneToTwoFilter && !twoToFourFilter && !maxScoreFilter) {
       setScoreFilter(category.filter(elements => elements.price <= e.target.value))
     }else {
@@ -70,32 +73,42 @@ function HocCategoryes(props) {
     // range filter save for us the last state after we use score filter and we use that when price filter start change
     // this useEffect handle score filter in all situation
     if (oneToTwoFilter) {
-      setScoreFilter(category.filter((elements) => elements.rating.rate <= 2.5));
-      setRangeFilter(category.filter((elements) => elements.rating.rate <= 2.5))
+      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 2.5));
+      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 2.5));
+      
+      // setScoreFilter(category.filter((elements) => elements.rating.rate <= 2.5));
+      setRangeFilter(category.filter((elements) => elements.rating.rate <= 2.5));
     } else if (twoToFourFilter) {
-      setScoreFilter(category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
-      setRangeFilter( category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5))
+      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5))
+      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
+
+      // setScoreFilter(category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
+      setRangeFilter( category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
     } else if (maxScoreFilter) {
-      setScoreFilter(category.filter((elements) => elements.rating.rate > 4));
-      setRangeFilter(category.filter((elements) => elements.rating.rate > 4))
+      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate > 4))
+      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate > 4));
+      // setScoreFilter(category.filter((elements) => elements.rating.rate > 4));
+      setRangeFilter(category.filter((elements) => elements.rating.rate > 4));
     } else {
-      setScoreFilter(category);
-      setRangeFilter(category)
+      if(!isPriceFilter) setScoreFilter(category);
+      else setScoreFilter([...helperFilter])
+      // setScoreFilter(category);
+      setRangeFilter(category);
     }
 
     if (oneToTwoFilter && twoToFourFilter) {
       setScoreFilter(category.filter((elements) => elements.rating.rate <= 4));
-      setRangeFilter(category.filter((elements) => elements.rating.rate <= 4))
+      setRangeFilter(category.filter((elements) => elements.rating.rate <= 4));
     } else if (oneToTwoFilter && maxScoreFilter) {
       setScoreFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
-      setRangeFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5))
+      setRangeFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
     } else if (twoToFourFilter && maxScoreFilter) {
       setScoreFilter(category.filter((elements) => elements.rating.rate > 2.5));
-      setRangeFilter(category.filter((elements) => elements.rating.rate > 2.5))
+      setRangeFilter(category.filter((elements) => elements.rating.rate > 2.5));
     }
     if (oneToTwoFilter && twoToFourFilter && maxScoreFilter) {
       setScoreFilter(category);
-      setRangeFilter(category)
+      setRangeFilter(category);
     }
   }, [oneToTwoFilter, twoToFourFilter, maxScoreFilter]);
 

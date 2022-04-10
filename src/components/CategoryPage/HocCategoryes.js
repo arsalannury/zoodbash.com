@@ -40,7 +40,7 @@ function HocCategoryes(props) {
       if(scoreFilter.find(elements => elements.price <= e.target.value)){
         setScoreFilter(rangeFilter.filter(elements => elements.price <= e.target.value))
       }else{
-        setScoreFilter([...scoreFilter])
+        setScoreFilter(rangeFilter)
       }
     }
    
@@ -75,39 +75,42 @@ function HocCategoryes(props) {
     if (oneToTwoFilter) {
       if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 2.5));
       else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 2.5));
-      
-      // setScoreFilter(category.filter((elements) => elements.rating.rate <= 2.5));
       setRangeFilter(category.filter((elements) => elements.rating.rate <= 2.5));
     } else if (twoToFourFilter) {
       if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5))
       else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
-
-      // setScoreFilter(category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
+      console.log(scoreFilter)
       setRangeFilter( category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
     } else if (maxScoreFilter) {
       if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate > 4))
       else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate > 4));
-      // setScoreFilter(category.filter((elements) => elements.rating.rate > 4));
       setRangeFilter(category.filter((elements) => elements.rating.rate > 4));
     } else {
       if(!isPriceFilter) setScoreFilter(category);
-      else setScoreFilter([...helperFilter])
-      // setScoreFilter(category);
+      else setScoreFilter(helperFilter)
       setRangeFilter(category);
     }
 
     if (oneToTwoFilter && twoToFourFilter) {
-      setScoreFilter(category.filter((elements) => elements.rating.rate <= 4));
+      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 4));
+      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 4));
+      // setScoreFilter(category.filter((elements) => elements.rating.rate <= 4));
       setRangeFilter(category.filter((elements) => elements.rating.rate <= 4));
     } else if (oneToTwoFilter && maxScoreFilter) {
-      setScoreFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
+      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
+      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
+      // setScoreFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
       setRangeFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
     } else if (twoToFourFilter && maxScoreFilter) {
-      setScoreFilter(category.filter((elements) => elements.rating.rate > 2.5));
+      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate > 2.5));
+      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate > 2.5));
+      // setScoreFilter(category.filter((elements) => elements.rating.rate > 2.5));
       setRangeFilter(category.filter((elements) => elements.rating.rate > 2.5));
     }
     if (oneToTwoFilter && twoToFourFilter && maxScoreFilter) {
-      setScoreFilter(category);
+      if(!isPriceFilter) setScoreFilter(category);
+      else setScoreFilter(helperFilter);
+      // setScoreFilter(category);
       setRangeFilter(category);
     }
   }, [oneToTwoFilter, twoToFourFilter, maxScoreFilter]);

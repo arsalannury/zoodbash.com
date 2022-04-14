@@ -21,12 +21,16 @@ function CategoryLoading() {
           >
             <Skeleton
               count={1}
-              circle={true}
-              width={150}
-              height={150}
+              // circle={true}
+              width={250}
+              height={250}
               style={{ margin: "55px 0" }}
             />
-            <Skeleton count={3} width={300} height={10} />
+            <div style={{display:'flex',alignItems:'center',flexDirection:'column'}}>
+            <Skeleton count={1} width={250} height={20} style={{margin: '10px 0'}} />
+            <Skeleton count={1} width={250} height={20} style={{margin: '10px 0'}} />
+            <Skeleton count={1} width={130} height={20} style={{margin: '15px 0'}} />
+            </div>
           </Grid>
         </>
       );

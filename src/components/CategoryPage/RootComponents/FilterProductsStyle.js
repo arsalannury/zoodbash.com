@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { Grid, Button } from "@mui/material";
 
 export const Wrapper = styled(Grid)`
-  border-left: 1px solid #ddd;
+  border: 1px solid #eee;
   background: #fff;
   z-index: 100;
-  // transition: all .5s ease;
+  transition: all .5s ease;
+  margin: auto;
 `;
 export const PriceSection = styled(Grid)`
   width: 100%;
@@ -119,8 +120,13 @@ export const ClearFilters = styled.button`
   }
 `;
 
+
+export const Div = styled.div`
+width:100%;
+`
 export const ButtonFilter = styled(Button)`
   display: none;
+  align-self: flex-start;
   @media screen and (max-width: 899px) {
     display: unset;
   }

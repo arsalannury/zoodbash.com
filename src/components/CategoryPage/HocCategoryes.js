@@ -79,7 +79,6 @@ function HocCategoryes(props) {
     } else if (twoToFourFilter) {
       if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5))
       else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
-      console.log(scoreFilter)
       setRangeFilter( category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
     } else if (maxScoreFilter) {
       if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate > 4))
@@ -126,6 +125,9 @@ function HocCategoryes(props) {
               md={3}
               lg={3}
               sx={{ position: "relative" }}
+              // container
+              // alignItems={'flex-start'}
+              // justifyContent={'center'}
             >
               <FilterProducts
                 checkboxOneToTwo={checkboxOneToTwo}

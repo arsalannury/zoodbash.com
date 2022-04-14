@@ -55,20 +55,20 @@ function FilterProducts({
   const [rangeValue, setRangeValue] = useState(0);
   const [filterShow, setFilterShow] = useState("translateX(300%)");
   const [overflowShow, setOverflowShow] = useState(false);
-  const [filterHeight, setFilterHeight] = useState("100%");
+  const [filterHeight, setFilterHeight] = useState("450px");
   const [positionFilter, setPositionFilter] = useState("absolute");
-  const [widthFilter, setWidthFilter] = useState("100%");
+  const [widthFilter, setWidthFilter] = useState("300px");
 
   useEffect(() => {
     EnglishNumberToPersian();
   }, []);
 
   const FilterShowHandler = () => {
-    setWidthFilter(widthFilter === "100%" ? "100vw" : "100%");
+    setWidthFilter(widthFilter === "300px" ? "100vw" : "300px");
     setFilterShow(
       filterShow === "translateX(300%)" ? "none" : "translateX(300%)"
     );
-    setFilterHeight(filterHeight === "100%" ? "100vh" : "100%");
+    setFilterHeight(filterHeight === "450px" ? "100vh" : "450px");
     setOverflowShow(overflowShow === false ? true : false);
     if (!overflowShow) document.body.classList.add("body_when_filter_show");
     else document.body.classList.remove("body_when_filter_show");
@@ -82,9 +82,11 @@ function FilterProducts({
 
   return (
     <>
-      <ButtonFilter onClick={FilterShowHandler}>
+
+     <ButtonFilter onClick={FilterShowHandler}>
         <FilterListIcon />
       </ButtonFilter>
+
       <Wrapper
         container
         flexDirection={"column"}
@@ -92,8 +94,8 @@ function FilterProducts({
         sx={{
           transform: "none",
           position: "none",
-          width: "100%",
-          height: "100%",
+          width: "300px",
+          height: "450px",
           "@media screen and (max-width : 899px)": {
             transform: filterShow,
             position: positionFilter,

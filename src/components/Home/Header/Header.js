@@ -6,23 +6,51 @@ import { useState, useEffect } from "react";
 
 const Header = () => {
   const [styles, setStyles] = useState(false);
+  const [positionHeader, setPositionHeader] = useState("unset");
+  const [shadowHeader, setShadowHeader] = useState("none");
+
+  const scrollChanges = () => {
+    window.scrollY > 5
+      ? setPositionHeader("sticky")
+      : setPositionHeader("unset");
+    window.scrollY > 5
+      ? setShadowHeader("0 -4px 15px #aaa")
+      : setShadowHeader("none");
+  };
 
   useEffect(() => {
-    window.innerWidth <= 600 ? setStyles(true) : setStyles(false)
+    window.innerWidth <= 600 ? setStyles(true) : setStyles(false);
     window.addEventListener("resize", (e) => {
       e.target.innerWidth <= 600 ? setStyles(true) : setStyles(false);
     });
   });
 
+  useEffect(() => {
+    window.addEventListener("scroll", scrollChanges);
+    return () => {
+      window.removeEventListener("scroll", scrollChanges);
+    };
+  }, []);
+
   return (
     <>
-      <Grid container>
+      <Grid
+        container
+        sx={{
+          boxShadow: shadowHeader,
+          position: positionHeader,
+          transition: "all .4s ease",
+          background: "#fff",
+          zIndex: 100,
+          top: "0",
+        }}
+      >
         <Grid item xs={6} sm={6} md={6}>
-         <Link to={'/'}>
-         <Image src="zood.png" />
-         </Link>
+          <Link to={"/"}>
+            <Image src="zood.png" />
+          </Link>
         </Grid>
-        <Grid item xs={6} sm={6} md={6} sx={{textAlign: 'end'}}>
+        <Grid item xs={6} sm={6} md={6} sx={{ textAlign: "end" }}>
           {!styles ? (
             <>
               <List>

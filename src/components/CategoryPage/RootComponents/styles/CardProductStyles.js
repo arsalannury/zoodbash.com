@@ -98,14 +98,6 @@ export const Btn = styled(Button)`
   font-size: 0.7em;
   width: 70%;
   position:relative;
-//   &::before{
-//       content: url('blob.svg');
-//       position: absolute;
-//       z-index: -1;
-//       left:0;
-//       right:0;
-//       width:90px;
-//   }
 `;
 export const Information = styled(Grid)``;
 

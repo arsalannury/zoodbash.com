@@ -63,15 +63,15 @@ const Header = () => {
                     </CatalogItem>
                     <CatalogItem>
                       {" "}
-                      <Link to={"/jeweleryes"}> جواهرات</Link>
+                      <Link to={"/jewelery"}> جواهرات</Link>
                     </CatalogItem>
                     <CatalogItem>
                       {" "}
-                      <Link to={"/mensClothing"}> لباس مردانه</Link>
+                      <Link to={"/men's clothing"}> لباس مردانه</Link>
                     </CatalogItem>
                     <CatalogItem>
                       {" "}
-                      <Link to={"/womenClothing"}> لباس زنانه</Link>
+                      <Link to={"/women's clothing"}> لباس زنانه</Link>
                     </CatalogItem>
                   </CatalogList>
                 </ListItem>

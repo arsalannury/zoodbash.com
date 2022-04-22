@@ -4,7 +4,7 @@ import {useEffect} from 'react';
 import { EnglishNumberToPersian } from '../../ToPersian/EnglishNumberToPersian';
 import {Box,Btn,Card,Div,Footer,Image,ImgPrice,Information,LinkImg,Title} from './styles/CardProductStyles'
 
-function CardProducts({title,image,price,rating}) {
+function CardProducts({title,image,price,rating,id,category}) {
 
   useEffect(() => {
    EnglishNumberToPersian()
@@ -15,7 +15,7 @@ function CardProducts({title,image,price,rating}) {
     <Grid container alignItems={'center'} justifyContent={'center'} item xs={12} sm={6} md={6} lg={4} my={5}>
      <Card >
 
-         <LinkImg to={'/'}><Image src={image} /></LinkImg>
+         <LinkImg to={`/${category}/${id}`}><Image src={image} /></LinkImg>
          <Title>{title}</Title>
          <Div>
              <Information container alignItems={'center'} justifyContent={'space-between'}>
@@ -28,7 +28,7 @@ function CardProducts({title,image,price,rating}) {
          
          </Div>
          <Footer container alignItems={'center'} justifyContent={'center'} mt={6}>
-             <Btn variant='outlined'><Link to={'/'}></Link>مشاهده محصول</Btn>
+             <Btn variant='outlined'><Link to={`/${category}/${id}`}></Link>مشاهده محصول</Btn>
          </Footer>
      </Card>
      </Grid>

@@ -66,6 +66,7 @@ function HocCategoryes(props) {
         setScoreFilter(response.data);
         getCategory(response.data);
         setLoading(false);
+        console.log(response.data)
       } catch (error) {
         setLoading(true);
       }
@@ -171,6 +172,8 @@ function HocCategoryes(props) {
                   image={product.image}
                   price={product.price}
                   rating={product.rating}
+                  id={product.id}
+                  category={product.category}
                 />
                 )
               ))}

@@ -13,10 +13,14 @@ const App = () => {
       <Header />
       <Switch>
         <Route path={"/"} exact component={Home} />
+        <Route path={"/electronics/:id"} />
+        <Route path={'/jewelery/:id'} />
+        <Route path={"/men's clothing/:id"} />
+        <Route path={"/women's clothing/:id"} />
         <Route path={"/electronics"} component={Electronics} />
-        <Route path={'/jeweleryes'} component={Jeweleryes} />
-        <Route path={'/mensClothing'} component={MensClothing} />
-        <Route path={'/womenClothing'} component={WomenClothing} />
+        <Route path={'/jewelery'} component={Jeweleryes} />
+        <Route path={"/men's clothing"} component={MensClothing} />
+        <Route path={"/women's clothing"} component={WomenClothing} />
       </Switch>
     </>
   );

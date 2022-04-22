@@ -57,15 +57,15 @@ function HeaderMobile() {
             </CatalogItem>
             <CatalogItem>
               {" "}
-              <MenuLink to={"/jeweleryes"}> جواهرات</MenuLink>
+              <MenuLink to={"/jewelery"}> جواهرات</MenuLink>
             </CatalogItem>
             <CatalogItem>
               {" "}
-              <MenuLink to={"/mensClothing"}> لباس مردانه</MenuLink>
+              <MenuLink to={"/men's clothing"}> لباس مردانه</MenuLink>
             </CatalogItem>
             <CatalogItem>
               {" "}
-              <MenuLink to={"/womenClothing"}> لباس زنانه</MenuLink>
+              <MenuLink to={"/women's clothing"}> لباس زنانه</MenuLink>
             </CatalogItem>
             </Fade>
           </CatalogList>

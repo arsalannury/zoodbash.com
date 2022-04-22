@@ -105,7 +105,7 @@ export const LinkImg = styled(Link)``;
 export const Box = styled(Grid)``;
 
 export const ImgPrice = styled.img`
-  width: 20px;
+  width: 40px;
   margin-right: 3px;
   filter: opacity(0.8);
 `;

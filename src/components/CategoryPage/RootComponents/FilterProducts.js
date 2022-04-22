@@ -154,7 +154,7 @@ function FilterProducts({
                 type={"checkbox"}
                 id="check1"
                 value="onetotwo"
-                defaultchecked={oneToTwoFilter}
+                checked={oneToTwoFilter}
                 onChange={checkboxOneToTwo}
               />
             </FirstStateRates>
@@ -168,7 +168,7 @@ function FilterProducts({
                 type={"checkbox"}
                 id="check2"
                 value="twotofour"
-                defaultchecked={twoToFourFilter}
+                checked={twoToFourFilter}
                 onChange={checkboxTwoToFour}
               />
             </SecondStateRates>
@@ -179,10 +179,12 @@ function FilterProducts({
             >
               <Thlabel htmlFor={"check3"}>بیشترین امتیاز</Thlabel>
               <ThcheckBox
+                className="aa"
+                
                 type={"checkbox"}
                 id="check3"
                 value="maxscore"
-                defaultchecked={maxScoreFilter}
+                checked={maxScoreFilter}
                 onChange={checkboxMaxScore}
               />
             </ThirdStateRates>

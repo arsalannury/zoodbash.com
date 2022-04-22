@@ -19,9 +19,9 @@ function CardProducts({title,image,price,rating}) {
          <Title>{title}</Title>
          <Div>
              <Information container alignItems={'center'} justifyContent={'space-between'}>
-             <Box container alignItems={'center'} width={'50px'}>
+             <Box container alignItems={'center'} width={'80px'}>
              <Typography sx={{fontFamily : 'unset',fontSize : '.8em'}}>{price.toString().toPersian()}</Typography>
-             <ImgPrice src="تومان.png" />
+             <ImgPrice src="هزارتومان.png" />
              </Box>
              <Rating name="read-only" value={rating.rate} readOnly />
              </Information>

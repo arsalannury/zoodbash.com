@@ -47,6 +47,11 @@ function HocCategoryes(props) {
   }
 
   const clearAllFilter = () => {
+    // if(!oneToTwoFilter && !twoToFourFilter && !maxScoreFilter) return;
+    setScoreFilter(category)
+    setHelperFilter(category)
+    setmaxScoreFilter(false)
+    setTwoToFourFilter(false)
     setOneToTwoFilter(false)
   }
 

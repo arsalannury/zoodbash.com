@@ -4,6 +4,7 @@ import Jeweleryes from "./CategoryPage/Jeweleryes/Jeweleryes";
 import MensClothing from "./CategoryPage/Clothing/MensClothing";
 import WomenClothing from "./CategoryPage/Clothing/WomenClothing";
 import Header from './Home/Header/Header';
+import EachProduct from "./CategoryPage/EachProduct/EachProduct";
 import { Switch, Route } from "react-router-dom";
 import "../index.css";
 
@@ -13,7 +14,7 @@ const App = () => {
       <Header />
       <Switch>
         <Route path={"/"} exact component={Home} />
-        <Route path={"/electronics/:id"} />
+        <Route path={"/electronics/:id"} component={EachProduct} />
         <Route path={'/jewelery/:id'} />
         <Route path={"/men's clothing/:id"} />
         <Route path={"/women's clothing/:id"} />

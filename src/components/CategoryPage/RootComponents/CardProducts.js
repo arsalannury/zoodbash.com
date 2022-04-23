@@ -28,7 +28,7 @@ function CardProducts({title,image,price,rating,id,category}) {
          
          </Div>
          <Footer container alignItems={'center'} justifyContent={'center'} mt={6}>
-             <Btn variant='outlined'><Link to={`/${category}/${id}`}></Link>مشاهده محصول</Btn>
+             <Btn variant='outlined'><Link to={`/${category}/${id}`}>مشاهده محصول</Link></Btn>
          </Footer>
      </Card>
      </Grid>

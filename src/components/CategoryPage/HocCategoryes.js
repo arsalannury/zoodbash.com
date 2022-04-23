@@ -66,7 +66,7 @@ function HocCategoryes(props) {
         setScoreFilter(response.data);
         getCategory(response.data);
         setLoading(false);
-        console.log(response.data)
+        // console.log(response.data)
       } catch (error) {
         setLoading(true);
       }

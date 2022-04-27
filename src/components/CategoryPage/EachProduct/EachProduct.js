@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import EeachProductLoading from "../../Loading/EeachProductLoading";
-import Chip from "@mui/material/Chip";
-import Prices from "../../../images/هزارتومان.png";
-import FaceIcon from "@mui/icons-material/Face";
 import TabComponentTheme from "../../../Theme/TabItemTheme";
+import Chip from "@mui/material/Chip";
+import { Rating, Tabs, Tab, Box } from "@mui/material";
 import {
   DetailsWrapper,
   ImageProduct,
@@ -21,16 +21,23 @@ import {
   BoxT,
   ImgPrice,
   PriceWrapper,
+  IconsBox,
+  Icon
 } from "./EachProductStyle";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
-import PropTypes from "prop-types";
-import { Rating, Tabs, Tab, Typography, Box } from "@mui/material";
+
 import {
   TabPanel,
   a11yProps,
 } from "../../../Theme/ConfigMuiComponents/ConfigTabsComponent";
+import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import FaceIcon from "@mui/icons-material/Face";
+
+import Prices from "../../../images/هزارتومان.png";
+import delivery from '../../../images/delivery.png';
+import quality from '../../../images/quality.png';
+import gift from '../../../images/gift.png'
 
 String.prototype.toPersian = function () {
   let num = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۰"];
@@ -143,7 +150,7 @@ function EachProduct(props) {
                 />
               </BoxT>
 
-              <Box sx={{ width: "100%" }}>
+              <Box sx={{ width: "100%" , my: '40px' }}>
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                   <Tabs
                     value={value}
@@ -179,6 +186,12 @@ function EachProduct(props) {
                   </TabPanel>
                 </TabComponentTheme>
               </Box>
+
+              <IconsBox container alignItems={'center'} justifyContent={'space-around'}>
+                     <Icon src={delivery}  alt="delivery" />
+                     <Icon src={gift}  alt="gift" />
+                     <Icon src={quality}  alt="quality" />
+              </IconsBox>
             </DetailsWrapper>
           </Wrapper>
         </>

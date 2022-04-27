@@ -7,7 +7,7 @@ export const Wrapper = styled(Grid)`
 `;
 export const ImageWrapper = styled(Grid)``;
 export const DetailsWrapper = styled(Grid)`
-//   height: 300px;
+  //   height: 300px;
   align-self: flex-start;
 `;
 export const ImageProduct = styled.img`
@@ -20,7 +20,6 @@ export const Actions = styled(Grid)`
   }
 `;
 export const Title = styled.p`
-  font-weight: bold;
   border-bottom: 1px solid #eee;
   font-size: 1.1em;
   margin: 0 0 0 16px;
@@ -28,9 +27,11 @@ export const Title = styled.p`
 `;
 export const Description = styled.p`
   text-align: left;
+  margin: 20px 0 20px 15px;
+  color: #aaa;
 `;
 export const Price = styled.span`
-margin-left: 5px;
+  margin-left: 5px;
 `;
 export const TopImageSection = styled(Grid)``;
 export const AnotherImages = styled(Grid)`
@@ -45,7 +46,18 @@ export const Boxx = styled(Grid)`
 export const AnotherImage = styled.img`
   width: 130px;
 `;
-export const BoxT = styled(Grid)``
+export const BoxT = styled(Grid)`
+  margin: 40px 0;
+`;
 
-export const PriceWrapper = styled(Grid)``
-export const ImgPrice = styled.img``
+export const PriceWrapper = styled(Grid)`
+  margin: 40px 0;
+`;
+export const ImgPrice = styled.img``;
+
+export const IconsBox = styled(Grid)`
+  margin-top: 30px;
+`;
+export const Icon = styled.img`
+  width: 70px;
+`;

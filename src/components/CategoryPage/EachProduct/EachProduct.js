@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import EeachProductLoading from "../../Loading/EeachProductLoading";
 import TabComponentTheme from "../../../Theme/TabItemTheme";
-import Chip from "@mui/material/Chip";
-import { Rating, Tabs, Tab, Box } from "@mui/material";
+import TooltipTheme from "../../../Theme/TooltipTheme";
+import { Rating, Tabs, Tab, Box, Tooltip, Chip } from "@mui/material";
 import {
   DetailsWrapper,
   ImageProduct,
@@ -22,7 +22,7 @@ import {
   ImgPrice,
   PriceWrapper,
   IconsBox,
-  Icon
+  Icon,
 } from "./EachProductStyle";
 
 import {
@@ -35,9 +35,9 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import FaceIcon from "@mui/icons-material/Face";
 
 import Prices from "../../../images/هزارتومان.png";
-import delivery from '../../../images/delivery.png';
-import quality from '../../../images/quality.png';
-import gift from '../../../images/gift.png'
+import delivery from "../../../images/delivery.png";
+import quality from "../../../images/quality.png";
+import gift from "../../../images/gift.png";
 
 String.prototype.toPersian = function () {
   let num = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۰"];
@@ -150,7 +150,7 @@ function EachProduct(props) {
                 />
               </BoxT>
 
-              <Box sx={{ width: "100%" , my: '40px' }}>
+              <Box sx={{ width: "100%", my: "40px" }}>
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                   <Tabs
                     value={value}
@@ -187,10 +187,22 @@ function EachProduct(props) {
                 </TabComponentTheme>
               </Box>
 
-              <IconsBox container alignItems={'center'} justifyContent={'space-around'}>
-                     <Icon src={delivery}  alt="delivery" />
-                     <Icon src={gift}  alt="gift" />
-                     <Icon src={quality}  alt="quality" />
+              <IconsBox
+                container
+                alignItems={"center"}
+                justifyContent={"space-around"}
+              >
+                <TooltipTheme>
+                  <Tooltip title="تحویل سریع" arrow>
+                    <Icon src={delivery} alt="delivery" />
+                  </Tooltip>
+                  <Tooltip title="امکان بسته بندی مخصوص" arrow>
+                    <Icon src={gift} alt="gift" />
+                  </Tooltip>
+                  <Tooltip title="تضمین کیفیت محصول" arrow>
+                    <Icon src={quality} alt="quality" />
+                  </Tooltip>
+                </TooltipTheme>
               </IconsBox>
             </DetailsWrapper>
           </Wrapper>

@@ -2,7 +2,8 @@ import {Grid,Typography,Rating} from '@mui/material';
 import {Link} from 'react-router-dom';
 import {useEffect} from 'react';
 import { EnglishNumberToPersian } from '../../ToPersian/EnglishNumberToPersian';
-import {Box,Btn,Card,Div,Footer,Image,ImgPrice,Information,LinkImg,Title} from './styles/CardProductStyles'
+import {Box,Btn,Card,Div,Footer,Image,ImgPrice,Information,LinkImg,Title} from './styles/CardProductStyles';
+import Prices from '../../../images/هزارتومان.png';
 
 function CardProducts({title,image,price,rating,id,category}) {
 
@@ -21,7 +22,7 @@ function CardProducts({title,image,price,rating,id,category}) {
              <Information container alignItems={'center'} justifyContent={'space-between'}>
              <Box container alignItems={'center'} width={'80px'}>
              <Typography sx={{fontFamily : 'unset',fontSize : '.8em'}}>{price.toString().toPersian()}</Typography>
-             <ImgPrice src="هزارتومان.png" />
+             <ImgPrice src={Prices} />
              </Box>
              <Rating name="read-only" value={rating.rate} readOnly />
              </Information>

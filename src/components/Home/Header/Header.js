@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import HeaderMobile from "./HeaderMobile";
 import { useState, useEffect } from "react";
+import zood from '../../../images/zood.png'
+
 
 const Header = () => {
   const [styles, setStyles] = useState(false);
@@ -47,7 +49,7 @@ const Header = () => {
       >
         <Grid item xs={6} sm={6} md={6}>
           <Link to={"/"}>
-            <Image src="zood.png" />
+            <Image src={zood} />
           </Link>
         </Grid>
         <Grid item xs={6} sm={6} md={6} sx={{ textAlign: "end" }}>

@@ -4,7 +4,7 @@ import axios from "axios";
 import EeachProductLoading from "../../Loading/EeachProductLoading";
 import TabComponentTheme from "../../../Theme/TabItemTheme";
 import TooltipTheme from "../../../Theme/TooltipTheme";
-import { Rating, Tabs, Tab, Box, Tooltip, Chip } from "@mui/material";
+import { Rating, Tabs, Tab, Box, Tooltip, Chip, ButtonGroup,Button } from "@mui/material";
 import {
   DetailsWrapper,
   ImageProduct,
@@ -23,15 +23,17 @@ import {
   PriceWrapper,
   IconsBox,
   Icon,
+  Bookmark,
+  FavoriteIcon,
+  ShareIcon, 
+  ActionsSec
 } from "./EachProductStyle";
 
 import {
   TabPanel,
   a11yProps,
 } from "../../../Theme/ConfigMuiComponents/ConfigTabsComponent";
-import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FaceIcon from "@mui/icons-material/Face";
 
 import Prices from "../../../images/هزارتومان.png";
@@ -57,6 +59,16 @@ function EachProduct(props) {
   const [rateValue, setRateValue] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [value, setValue] = useState(0);
+  let [count,setCount] = useState(0);
+
+  const incrementCount = () => {
+    if(count >= 5) return;
+    setCount(++count)
+  }
+  const decrementCount = () => {
+    if(count <= 0) return;
+    setCount(--count)
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -88,7 +100,7 @@ function EachProduct(props) {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <ImageWrapper container xs={12} sm={12} md={6} lg={6}>
+            <ImageWrapper item container xs={12} sm={12} md={6} lg={6}>
               <TopImageSection container justifyContent={"space-evenly"}>
                 <Actions
                   container
@@ -96,9 +108,9 @@ function EachProduct(props) {
                   justifyContent={"space-around"}
                   flexDirection={"column"}
                 >
-                  <ShareOutlinedIcon />
-                  <FavoriteBorderOutlinedIcon />
-                  <BookmarkBorderOutlinedIcon />
+                  <ShareIcon />
+                  <FavoriteIcon />
+                  <Bookmark />
                 </Actions>
                 <ImageProduct src={product.image} />
               </TopImageSection>
@@ -121,6 +133,7 @@ function EachProduct(props) {
 
             <DetailsWrapper
               container
+              item
               xs={12}
               sm={12}
               md={6}
@@ -149,6 +162,15 @@ function EachProduct(props) {
                   label={"از دیدگاه کاربران"}
                 />
               </BoxT>
+
+              <ActionsSec sx={{my:3}} container alignItems={'flex-end'} justifyContent={'flex-end'} flexDirection={'column'}>
+                         <ButtonGroup sx={{padding:'5px',border:'1px solid #38b000'}}>
+                           <Button onClick={decrementCount} sx={{borderRadius:0}} variant="standard" color="warning">-</Button>
+                           <Button sx={{borderRadius:0}} variant="standard" disabled>{count}</Button>
+                           <Button onClick={incrementCount} sx={{borderRadius:0}} variant="standard" color="success">+</Button>
+                         </ButtonGroup>
+                         <Button sx={{fontFamily:'unset',mt:3}} color="success" variant="outlined">افزودن به سبد خرید</Button>
+              </ActionsSec>
 
               <Box sx={{ width: "100%", my: "40px" }}>
                 <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

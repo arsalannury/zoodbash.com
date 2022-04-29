@@ -5,6 +5,7 @@ import MensClothing from "./CategoryPage/Clothing/MensClothing";
 import WomenClothing from "./CategoryPage/Clothing/WomenClothing";
 import Header from './Home/Header/Header';
 import EachProduct from "./CategoryPage/EachProduct/EachProduct";
+import Footer from "./Home/Footer/Footer";
 import { Switch, Route } from "react-router-dom";
 import "../index.css";
 
@@ -23,6 +24,7 @@ const App = () => {
         <Route path={"/men's clothing"} component={MensClothing} />
         <Route path={"/women's clothing"} component={WomenClothing} />
       </Switch>
+      <Footer />
     </>
   );
 };

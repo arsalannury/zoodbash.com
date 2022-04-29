@@ -7,7 +7,6 @@ import SliderTwo from "./HomeSliders/SliderTwo";
 import CommentsAds from './Ads/CommentsAds/CommentsAds';
 import MenClothingCard from "./ProductsHomePage/MenClothing/MenClothingCard";
 import WomenClothing from "./ProductsHomePage/WomenClothing/WomenClothing";
-import Footer from "./Footer/Footer";
 
 const Home = () => {
     return ( 
@@ -21,7 +20,7 @@ const Home = () => {
         <CommentsAds />
         <MenClothingCard />
         <WomenClothing />
-        <Footer />
+        {/* <Footer /> */}
         </>
      );
 }

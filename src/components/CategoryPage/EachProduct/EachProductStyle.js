@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { Grid } from "@mui/material";
+import ShareOutlinedIcon from "@mui/icons-material/ShareOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 
 export const Wrapper = styled(Grid)`
-  margin-top: 40px;
+  margin: 40px 0;
   padding: 10px;
 `;
 export const ImageWrapper = styled(Grid)``;
 export const DetailsWrapper = styled(Grid)`
-  //   height: 300px;
   align-self: flex-start;
 `;
 export const ImageProduct = styled.img`
@@ -61,3 +63,32 @@ export const IconsBox = styled(Grid)`
 export const Icon = styled.img`
   width: 70px;
 `;
+export const ShareIcon = styled(ShareOutlinedIcon)`
+  transition: all 0.4s ease;
+  &:hover {
+    color: #aaa;
+  }
+  &:active {
+    color: #aaa;
+  }
+`;
+export const FavoriteIcon = styled(FavoriteBorderOutlinedIcon)`
+  transition: all 0.4s ease;
+  &:hover {
+    color: red;
+  }
+  &:active {
+    color: red;
+  }
+`;
+export const Bookmark = styled(BookmarkBorderOutlinedIcon)`
+  transition: all 0.4s ease;
+  &:hover {
+    color: #38b000;
+  }
+  &:active {
+    color: #38b000;
+  }
+`;
+
+export const ActionsSec = styled(Grid)``;

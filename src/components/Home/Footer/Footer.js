@@ -3,6 +3,9 @@ import styled from "styled-components";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import "./footer.css";
 import {Link} from 'react-router-dom';
+import namad1 from '../../../images/namad1.png';
+import namad2 from '../../../images/namad2.png' 
+
 
 const Footer = () => {
   return (
@@ -112,8 +115,8 @@ const Footer = () => {
             </Div>
           </About>
           <Logos container alignItems={'center'} justifyContent={'flex-end'} item xs={12} sm={12} md={6} lg={6} xl={6}>
-            <Img src="namad1.png" />
-            <Img src="namad2.png" />
+            <Img src={namad1} />
+            <Img src={namad2} />
           </Logos>
         </InformationSection>
         <CopyRight>تمامی حقوق این سایت متعلق به شرکت فرهنگ آواژه میباشد ۱۳۹۰-۱۴۰۱</CopyRight>

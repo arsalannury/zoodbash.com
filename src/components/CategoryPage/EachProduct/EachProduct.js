@@ -4,6 +4,7 @@ import axios from "axios";
 import EeachProductLoading from "../../Loading/EeachProductLoading";
 import TabComponentTheme from "../../../Theme/TabItemTheme";
 import TooltipTheme from "../../../Theme/TooltipTheme";
+import Swal from "sweetalert2";
 import { Rating, Tabs, Tab, Box, Tooltip, Chip, ButtonGroup,Button } from "@mui/material";
 import {
   DetailsWrapper,
@@ -41,6 +42,10 @@ import delivery from "../../../images/delivery.png";
 import quality from "../../../images/quality.png";
 import gift from "../../../images/gift.png";
 
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
+
+
 String.prototype.toPersian = function () {
   let num = ["۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹", "۰"];
   return this.replace(/[0-9]/g, function (number) {
@@ -62,7 +67,25 @@ function EachProduct(props) {
   let [count,setCount] = useState(0);
 
   const incrementCount = () => {
-    if(count >= 5) return;
+    if(count >= 5) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'error',
+        title: 'انتخاب بیشتر از پنج عدد مجاز نمیباشد'
+      })
+      return;
+    }
     setCount(++count)
   }
   const decrementCount = () => {
@@ -112,7 +135,9 @@ function EachProduct(props) {
                   <FavoriteIcon />
                   <Bookmark />
                 </Actions>
-                <ImageProduct src={product.image} />
+               <Zoom>
+               <ImageProduct src={product.image} />
+               </Zoom>
               </TopImageSection>
               <AnotherImages
                 container

@@ -161,7 +161,7 @@ function HocCategoryes(props) {
             >
               {/* when we don't have any products to show in page update with this message */}
               {scoreFilter.length === 0 ? (
-                <Typography color={'#14213d'} fontFamily={"unset"} fontSize={'.9em'}>
+                <Typography color={'#14213d'} fontFamily={"unset"} fontSize={'.9em'} component={'span'}>
                محصولی برای نمایش وجود ندارد                        
                 </Typography>
               ) : (

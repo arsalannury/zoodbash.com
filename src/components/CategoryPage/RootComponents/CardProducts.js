@@ -21,7 +21,7 @@ function CardProducts({title,image,price,rating,id,category}) {
          <Div>
              <Information container alignItems={'center'} justifyContent={'space-between'}>
              <Box container alignItems={'center'} width={'80px'}>
-             <Typography sx={{fontFamily : 'unset',fontSize : '.8em'}}>{price.toString().toPersian()}</Typography>
+             <Typography component={'span'} sx={{fontFamily : 'unset',fontSize : '.8em'}}>{price.toString().toPersian()}</Typography>
              <ImgPrice src={Prices} />
              </Box>
              <Rating name="read-only" value={rating.rate} readOnly />

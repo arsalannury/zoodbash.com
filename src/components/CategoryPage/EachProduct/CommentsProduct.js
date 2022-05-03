@@ -19,6 +19,7 @@ import {
   a11yProps,
 } from "../../../Theme/ConfigMuiComponents/ConfigTabsComponent";
 import Questions from "./Questions";
+import CreateComment from "./CreateComment";
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -89,13 +90,14 @@ export default function CommentsProduct() {
                     <Divider variant="inset" component="li" />
                   </>
                 ))}
-            </List>
+            </List>           
             <Button
               onClick={changePageComments}
               variant="outlined"
             >
               {showComment === 10 ? "نمایش بیشتر" : "نمایش کمتر"}
             </Button>
+            <CreateComment />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <Questions />

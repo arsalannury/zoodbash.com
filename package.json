@@ -20,6 +20,8 @@
     "react-scripts": "5.0.0",
     "react-timer-hook": "^3.0.5",
     "styled-components": "^5.3.3",
+    "stylis": "^4.1.1",
+    "stylis-plugin-rtl": "^2.1.1",
     "sweetalert2": "^11.4.10",
     "swiper": "^6.4.8",
     "web-vitals": "^2.1.4"

@@ -2,10 +2,18 @@ import { createTheme, ThemeProvider} from '@mui/material/styles';
 
 const theme = createTheme({
     components : {
+        MuiButtonBase : {
+            styleOverrides : {
+                root : {
+                    fontFamily : "font-sans !important",
+                    fontSize : '.8em',
+                }
+            }
+        },
         MuiTypography : {
             styleOverrides : {
                 root : {
-                    fontFamily : "font-sans",
+                    fontFamily : "font-sans !important",
                     textAlign : 'right',
                     fontSize : '.8em'
                 }
@@ -14,7 +22,7 @@ const theme = createTheme({
         MuiTouchRipple : {
             styleOverrides : {
                 root : {
-                    fontFamily : "font-sans",
+                    fontFamily : "font-sans !important",
                     fontSize : '.8em'
                 }
             }
@@ -27,7 +35,7 @@ const theme = createTheme({
                     margin : '20px 0 0 0'
                 }
             }
-        }
+        },
     }
 })
 

@@ -18,6 +18,7 @@ import {
   TabPanel,
   a11yProps,
 } from "../../../Theme/ConfigMuiComponents/ConfigTabsComponent";
+import Questions from "./Questions";
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -39,7 +40,7 @@ export default function CommentsProduct() {
   return (
     <>
       <CommentsTheme>
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%",marginTop: "50px" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={value}
@@ -59,7 +60,7 @@ export default function CommentsProduct() {
                 .fill({})
                 .map(() => (
                   <>
-                    {++CommentIndex}
+                    {/* {++CommentIndex} */}
 
                     <ListItem alignItems="flex-start">
                       <ListItemAvatar>
@@ -92,13 +93,12 @@ export default function CommentsProduct() {
             <Button
               onClick={changePageComments}
               variant="outlined"
-              sx={{ width: "50%", margin: "auto" }}
             >
               {showComment === 10 ? "نمایش بیشتر" : "نمایش کمتر"}
             </Button>
           </TabPanel>
           <TabPanel value={value} index={1}>
-            Item Two
+            <Questions />
           </TabPanel>
           <TabPanel value={value} index={2}>
             Item Three

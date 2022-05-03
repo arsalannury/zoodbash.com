@@ -6,7 +6,7 @@ const theme = createTheme({
         MuiTypography : {
             styleOverrides : {
                 root : {
-                    fontFamily: 'unset',
+                    fontFamily: 'font-sans',
                     color: '#1976d2',
                     fontSize: '.8em'
                 }

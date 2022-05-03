@@ -10,6 +10,23 @@ const theme = createTheme({
                     fontSize : '.8em'
                 }
             }
+        },
+        MuiTouchRipple : {
+            styleOverrides : {
+                root : {
+                    fontFamily : "font-sans",
+                    fontSize : '.8em'
+                }
+            }
+        },
+        MuiButton : {
+            styleOverrides : {
+                root : {
+                    fontFamily : "font-sans",
+                    fontSize : '.8em',
+                    margin : '20px 0 0 0'
+                }
+            }
         }
     }
 })

@@ -30,6 +30,11 @@ TabPanel.propTypes = {
 export default function CommentsProduct() {
   const [value, setValue] = useState(0);
   const [showComment, setShowComment] = useState(10);
+  const [commentInputs,setCommentInputs] = useState({
+    title : "",
+    email : "",
+    phone : ""
+  })
   let CommentIndex = 0;
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -38,6 +43,12 @@ export default function CommentsProduct() {
     setShowComment(showComment === 10 ? 20 : 10);
   };
 
+  const handleChangeInputs = ({currentTarget : input}) => {
+     const comments = {...commentInputs};
+     comments[input.name] = input.value;
+     setCommentInputs(comments)
+  }
+   
   return (
     <>
       <CommentsTheme>
@@ -97,7 +108,9 @@ export default function CommentsProduct() {
             >
               {showComment === 10 ? "نمایش بیشتر" : "نمایش کمتر"}
             </Button>
-            <CreateComment />
+            <CreateComment
+             commentInputs={commentInputs}
+             handleChangeInputs={handleChangeInputs} />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <Questions />

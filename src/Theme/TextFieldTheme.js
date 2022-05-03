@@ -33,6 +33,14 @@ const theme = createTheme({
         },
       },
     },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontFamily: "font-sans",
+        //   fontSize: ".8em",
+        },
+      },
+    },
   },
 });
 

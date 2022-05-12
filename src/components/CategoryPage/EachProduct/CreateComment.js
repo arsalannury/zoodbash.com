@@ -5,8 +5,14 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import TextFieldTheme from "../../../Theme/TextFieldTheme";
+import { useCommentContext } from "../../../Context/CommentContext";
+import { useState } from "react";
+import Alert from "@mui/material/Alert";
+import { AlertTheme } from "../../../Theme/AlertTheme";
 
-function CreateComment({handleChangeInputs,commentInputs}) {
+function CreateComment() {
+  const [sendComment, setSendComment] = useState(false);
+  const { handleSaveComments } = useCommentContext();
   const schema = yup
     .object()
     .shape({
@@ -16,7 +22,7 @@ function CreateComment({handleChangeInputs,commentInputs}) {
         .number()
         .typeError("فرمت شماره وارد شده صحیح نمیباشد")
         .required("شماره همراه خود را وارد کنید"),
-      text: yup.string().required("دیدگاهی اضافه کنید")
+      text: yup.string().required("دیدگاهی اضافه کنید"),
     })
     .required();
 
@@ -24,7 +30,7 @@ function CreateComment({handleChangeInputs,commentInputs}) {
     title: "",
     email: "",
     phone: "",
-    text: ""
+    text: "",
   };
 
   const {
@@ -38,83 +44,88 @@ function CreateComment({handleChangeInputs,commentInputs}) {
     resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
-      console.log(data);
+    console.log(data);
+    handleSaveComments(data);
+    setSendComment(true);
   };
   return (
     <>
-      <RTL>
-        <TextFieldTheme>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Grid
-              container
-              alignItems={"center"}
-              justifyContent={"space-around"}
-            >
-              
-              <Controller
-              name="title"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="عنوان"
-                  name="title"
-                  size="small"
-                //   onChange={handleChangeInputs}
-                //   value={commentInputs.title}
-                  error={!!errors.title}
-                  helperText={errors?.title?.message}
-                  variant="standard"
-                />
-              )}
-            />
-             <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="ایمیل"
-                  name="email"
-                  size="small"
-                //   onChange={handleChangeInputs}
-                //   value={commentInputs.email}
-                  error={!!errors.email}
-                  helperText={errors?.email?.message}
-                  variant="standard"
-                />
-              )}
-            />
-             <Controller
-              name="phone"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="شماره تماس"
-                  name="phone"
-                  size="small"
-                //   onChange={handleChangeInputs}
-                //   value={commentInputs.phone}
-                  error={!!errors.phone}
-                  helperText={errors?.phone?.message}
-                  variant="standard"
-                />
-              )}
-            />
-            </Grid>
-            <TextArea
-              {...register("text")}
-              maxLength={400}
-            //   onChange={handleChangeInputs}
-            //   value={commentInputs.text}
-              placeholder="دیدگاه خود را بنویسید ..."
-            ></TextArea>
-            <P>{errors.text?.message}</P>
-            <Button type="submit" disabled={!isValid} variant="outlined">ثبت دیدگاه</Button>
-          </Form>
-        </TextFieldTheme>
-      </RTL>
+      {!sendComment ? (
+        <>
+          <RTL>
+            <TextFieldTheme>
+              <Form onSubmit={handleSubmit(onSubmit)}>
+                <Grid
+                  container
+                  alignItems={"center"}
+                  justifyContent={"space-around"}
+                >
+                  <Controller
+                    name="title"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label="عنوان"
+                        name="title"
+                        size="small"
+                        error={!!errors.title}
+                        helperText={errors?.title?.message}
+                        variant="standard"
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="email"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label="ایمیل"
+                        name="email"
+                        size="small"
+                        error={!!errors.email}
+                        helperText={errors?.email?.message}
+                        variant="standard"
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="phone"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        label="شماره تماس"
+                        name="phone"
+                        size="small"
+                        error={!!errors.phone}
+                        helperText={errors?.phone?.message}
+                        variant="standard"
+                      />
+                    )}
+                  />
+                </Grid>
+                <TextArea
+                  {...register("text")}
+                  maxLength={400}
+                  placeholder="دیدگاه خود را بنویسید ..."
+                ></TextArea>
+                <P>{errors.text?.message}</P>
+                <Button type="submit" disabled={!isValid} variant="outlined">
+                  ثبت دیدگاه
+                </Button>
+              </Form>
+            </TextFieldTheme>
+          </RTL>
+        </>
+      ) : (
+        <AlertTheme>
+          <Alert variant="outlined" severity="success">
+            دیدگاه شما با موفقیت ثبت شد با تشکر از همراهی شما
+          </Alert>
+        </AlertTheme>
+      )}
     </>
   );
 }
@@ -129,7 +140,7 @@ const TextArea = styled.textarea`
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 7px;
-  margin: 30px 0 0 0 ;
+  margin: 30px 0 0 0;
   font-family: font-sans;
   &:focus {
     border: 1px solid #ccc !important;
@@ -148,8 +159,7 @@ const Form = styled.form`
   margin-top: 60px;
 `;
 
-const P = styled.p
-`
-color:#d32f2f;
-font-size:.8em;
+const P = styled.p`
+  color: #d32f2f;
+  font-size: 0.8em;
 `;

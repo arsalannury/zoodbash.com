@@ -1,11 +1,13 @@
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from "react-router-dom";
+import CommentContextProvider from "./Context/CommentContext";
 
 ReactDOM.render(
- 
   <BrowserRouter>
-   <App />
+    <CommentContextProvider>
+      <App />
+    </CommentContextProvider>
   </BrowserRouter>,
 
   document.getElementById("Project")

@@ -13,26 +13,21 @@ const CommentContextProvider = ({ children }) => {
     const newComments = [...comments];
     newComments.push(data);
     saveComments(newComments);
-
-    // const saveCommentsToLocalStorage = localStorage.setItem(
-    //   "comments",
-    //   JSON.stringify()
-    // );
   };
 
   useEffect(() => {
     if(comments.length !== 0) {
         if(localStorage.getItem("comments")){
-            let existLocal = JSON.parse(localStorage.getItem("comments"))
-            console.log(existLocal);
-            localStorage.setItem(
+             JSON.parse(localStorage.getItem("comments")).forEach((item) => {
+              localStorage.setItem(
                 "comments",
-               JSON.stringify([...existLocal,comments])
+               JSON.stringify([item,...comments])
             );
+             })
         }else {
             localStorage.setItem(
                 "comments",
-               JSON.stringify(comments)
+               JSON.stringify([...comments])
             );
         }
     }

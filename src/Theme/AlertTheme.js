@@ -10,18 +10,12 @@ const theme = createTheme({
                 }
             }
         },
-        MuiAlert : {
-            styleOverrides : {
-                icon : {
-                    margin: "0 12px"
-                }
-            }
-        },
         MuiAlert: {
             styleOverrides : {
                 message : {
                     fontFamily: 'font-sans',
-                    color: "#4caf50"
+                    color: "#4caf50",
+                    marginRight: '10px'
                 }
             }
         }

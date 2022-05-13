@@ -20,6 +20,7 @@ import {
 } from "../../../Theme/ConfigMuiComponents/ConfigTabsComponent";
 import Questions from "./Questions";
 import CreateComment from "./CreateComment";
+import { useCommentContext } from "../../../Context/CommentContext";
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -30,11 +31,7 @@ TabPanel.propTypes = {
 export default function CommentsProduct() {
   const [value, setValue] = useState(0);
   const [showComment, setShowComment] = useState(10);
-  const [commentInputs,setCommentInputs] = useState({
-    title : "",
-    email : "",
-    phone : ""
-  })
+  const { comments } = useCommentContext();
   let CommentIndex = 0;
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -43,16 +40,10 @@ export default function CommentsProduct() {
     setShowComment(showComment === 10 ? 20 : 10);
   };
 
-  const handleChangeInputs = ({currentTarget : input}) => {
-     const comments = {...commentInputs};
-     comments[input.name] = input.value;
-     setCommentInputs(comments)
-  }
-   
   return (
     <>
       <CommentsTheme>
-        <Box sx={{ width: "100%",marginTop: "50px" }}>
+        <Box sx={{ width: "100%", marginTop: "50px" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={value}
@@ -101,16 +92,41 @@ export default function CommentsProduct() {
                     <Divider variant="inset" component="li" />
                   </>
                 ))}
-            </List>           
-            <Button
-              onClick={changePageComments}
-              variant="outlined"
-            >
+              {comments.map((item, index) => (
+                <>
+                  <ListItem alignItems="flex-start" key={index}>
+                    <ListItemAvatar>
+                      <Avatar
+                        alt="Cindy Baker"
+                        src="/static/images/avatar/3.jpg"
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={item.title}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            sx={{ display: "inline" }}
+                            component="span"
+                            variant="body2"
+                            color="#0288d1"
+                          >
+                            کاربر زودباش
+                          </Typography>
+                           { ` -- ${item.text} ` }
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </>
+              ))}
+            </List>
+
+            <Button onClick={changePageComments} variant="outlined">
               {showComment === 10 ? "نمایش بیشتر" : "نمایش کمتر"}
             </Button>
-            <CreateComment
-             commentInputs={commentInputs}
-             handleChangeInputs={handleChangeInputs} />
+            <CreateComment />
           </TabPanel>
           <TabPanel value={value} index={1}>
             <Questions />

@@ -1,4 +1,4 @@
-import { TextField, Button, Grid } from "@mui/material";
+import { TextField, Button, Grid, CircularProgress } from "@mui/material";
 import styled from "styled-components";
 import RTL from "../../../Theme/RTL";
 import { useForm, Controller } from "react-hook-form";
@@ -12,6 +12,7 @@ import { AlertTheme } from "../../../Theme/AlertTheme";
 
 function CreateComment() {
   const [sendComment, setSendComment] = useState(false);
+  const [wait,setWait] = useState(false);
   const { handleSaveComments } = useCommentContext();
   const schema = yup
     .object()
@@ -46,7 +47,11 @@ function CreateComment() {
   const onSubmit = (data) => {
     console.log(data);
     handleSaveComments(data);
+    setWait(true);
+    setTimeout(() => {
     setSendComment(true);
+    setWait(false);
+    },2000)
   };
   return (
     <>
@@ -113,7 +118,11 @@ function CreateComment() {
                 ></TextArea>
                 <P>{errors.text?.message}</P>
                 <Button type="submit" disabled={!isValid} variant="outlined">
-                  ثبت دیدگاه
+                 {!wait ? (
+                   " ثبت دیدگاه"
+                 ) : (
+                   <CircularProgress />
+                 )}
                 </Button>
               </Form>
             </TextFieldTheme>

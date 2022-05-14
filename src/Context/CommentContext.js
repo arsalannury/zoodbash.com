@@ -1,4 +1,4 @@
-import { createContext, useContext, useState,useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const CommentContext = createContext({});
 
@@ -10,28 +10,27 @@ const CommentContextProvider = ({ children }) => {
   const [comments, saveComments] = useState([]);
 
   const handleSaveComments = (data) => {
+     setTimeout(() => {
     const newComments = [...comments];
     newComments.push(data);
     saveComments(newComments);
+    const localStorageCheck = JSON.parse(localStorage.getItem("comments"));
+      if (localStorageCheck) {
+        localStorage.setItem(
+          "comments",
+          JSON.stringify([data, ...localStorageCheck])
+        );
+      } else {
+        localStorage.setItem("comments", JSON.stringify([data, ...comments]));
+      }
+    }, 2000);
   };
 
   useEffect(() => {
-    if(comments.length !== 0) {
-        if(localStorage.getItem("comments")){
-             JSON.parse(localStorage.getItem("comments")).forEach((item) => {
-              localStorage.setItem(
-                "comments",
-               JSON.stringify([item,...comments])
-            );
-             })
-        }else {
-            localStorage.setItem(
-                "comments",
-               JSON.stringify([...comments])
-            );
-        }
+    if (localStorage.getItem("comments")) {
+      saveComments(JSON.parse(localStorage.getItem("comments")));
     }
-  },[comments])
+  }, []);
 
   return (
     <CommentContext.Provider
@@ -46,3 +45,17 @@ const CommentContextProvider = ({ children }) => {
 };
 
 export default CommentContextProvider;
+
+// if(localStorage.getItem("comments")){
+//   JSON.parse(localStorage.getItem("comments")).forEach((item) => {
+//    localStorage.setItem(
+//      "comments",
+//     JSON.stringify([item])
+//  );
+//   })
+// }else {
+//  localStorage.setItem(
+//      "comments",
+//     JSON.stringify([...comments])
+//  );
+// }

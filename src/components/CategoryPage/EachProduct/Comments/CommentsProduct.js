@@ -13,14 +13,15 @@ import {
   List,
   Button,
 } from "@mui/material";
-import CommentsTheme from "../../../Theme/CommentsTheme";
+import CommentsTheme from "../../../../Theme/CommentsTheme";
 import {
   TabPanel,
   a11yProps,
-} from "../../../Theme/ConfigMuiComponents/ConfigTabsComponent";
-import Questions from "./Questions";
+} from "../../../../Theme/ConfigMuiComponents/ConfigTabsComponent";
+import Questions from "../Questions";
 import CreateComment from "./CreateComment";
-import { useCommentContext } from "../../../Context/CommentContext";
+import { useCommentContext } from "../../../../Context/CommentContext";
+import Selers from "../Selers/Selers";
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -132,7 +133,7 @@ export default function CommentsProduct() {
             <Questions />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item Three
+           <Selers />
           </TabPanel>
         </Box>
       </CommentsTheme>

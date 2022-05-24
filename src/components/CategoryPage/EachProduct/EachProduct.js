@@ -4,7 +4,7 @@ import axios from "axios";
 import EeachProductLoading from "../../Loading/EeachProductLoading";
 import TabComponentTheme from "../../../Theme/TabItemTheme";
 import TooltipTheme from "../../../Theme/TooltipTheme";
-import CommentsProduct from './CommentsProduct';
+import CommentsProduct from '../EachProduct/Comments/CommentsProduct';
 import Swal from "sweetalert2";
 import { Rating, Tabs, Tab, Box, Tooltip, Chip, ButtonGroup,Button } from "@mui/material";
 import {

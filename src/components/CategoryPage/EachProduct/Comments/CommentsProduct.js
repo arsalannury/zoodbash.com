@@ -21,7 +21,7 @@ import {
 import Questions from "../Questions";
 import CreateComment from "./CreateComment";
 import { useCommentContext } from "../../../../Context/CommentContext";
-import Selers from "../Selers/Selers";
+import {MemoSelers} from "../Selers/Selers";
 
 TabPanel.propTypes = {
   children: PropTypes.node,
@@ -133,7 +133,7 @@ export default function CommentsProduct() {
             <Questions />
           </TabPanel>
           <TabPanel value={value} index={2}>
-           <Selers />
+           <MemoSelers />
           </TabPanel>
         </Box>
       </CommentsTheme>

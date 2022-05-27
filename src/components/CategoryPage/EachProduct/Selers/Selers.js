@@ -5,9 +5,15 @@ import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import shop from "../../../../images/shop.png";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import DetailSeler from "./DetailSeler";
 
 const Selers = () => {
   const [selersList, getSelersList] = useState([]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+ 
 
   const supabase = createClient(
     "https://hzsqceossbxbfhtyrkme.supabase.co",
@@ -27,33 +33,39 @@ const Selers = () => {
   }, []);
   return (
     <>
-      <Grid m={6}>
+      <Grid container alignItems={"center"} justifyContent={"center"}>
         {selersList.map((seler) => (
-          <Div p={1} m={2} key={seler.id}
-          // item
-          // sx={12}
-          // sm={12}
-          // md={6}
-          // lg={6}
-          // xl={6}
+          <>
+          <Div
+            p={1}
+            m={2}
+            key={seler.id}
+            onClick={handleOpen}
+            // item
+            // sx={12}
+            // sm={12}
+            // md={6}
+            // lg={6}
+            // xl={6}
           >
             <SelerBox
               container
               alignItems={"center"}
               justifyContent={"space-between"}
+              rowGap={3}
             >
-              <Grid 
-              container
-              alignItems={'flex-start'}
-              justifyContent={'flex-start'}
-              item
-              sx={12}
-              sm={12}
-              md={6}
-              lg={6}
-              xl={6}
+              <Grid
+                container
+                alignItems={"flex-start"}
+                justifyContent={"flex-start"}
+                item
+                sx={12}
+                sm={12}
+                md={6}
+                lg={6}
+                xl={6}
               >
-              <Shop src={shop} />
+                <Shop src={shop} />
                 <Grid mr={2}>
                   <Title>{seler.seler}</Title>
                   <Delivery>{seler.delivery}</Delivery>
@@ -61,10 +73,10 @@ const Selers = () => {
               </Grid>
 
               {/* <Grid> */}
-                <Grid>
-                  <Title>{seler.status}</Title>
-                  <Rating name="read-only" value={seler.score} readOnly />
-                </Grid>
+              <Grid>
+                <Title>عضویت از {seler.status} قبل </Title>
+                <Rating name="read-only" value={seler.score} readOnly />
+              </Grid>
               {/* </Grid> */}
 
               <Button
@@ -74,13 +86,15 @@ const Selers = () => {
                   marginTop: "0",
                   "& .MuiButton-startIcon": { margin: "5px" },
                 }}
-                variant="contained"
+                variant="outlined"
                 color="success"
               >
                 افزودن به سبد خرید
               </Button>
             </SelerBox>
           </Div>
+            <DetailSeler seler={seler} open={open} handleClose={handleClose} />
+          </>
         ))}
       </Grid>
     </>

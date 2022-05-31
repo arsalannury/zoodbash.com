@@ -20,5 +20,5 @@
 
 **Client:** React, ContextAPI, Material UI, Axios, styled-components
 
-**Server:** Fake Api (storeApi)
+**Server:** Fake Api (storeApi) and SupaBase real database
 

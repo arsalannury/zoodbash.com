@@ -1,11 +1,11 @@
-import { Div, SelerBox, Title, Shop, Delivery } from "./SelersStyle";
+import { Div, SelerBox, Title, Shop, Delivery,DetailSeler } from "./SelersStyle";
 import React from "react";
 import { Grid, Rating, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import shop from "../../../../images/shop.png";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import DetailSeler from "./DetailSeler";
+// import DetailSeler from "./DetailSeler";
 
 const Selers = () => {
   const [selersList, getSelersList] = useState([]);
@@ -26,6 +26,7 @@ const Selers = () => {
           .from("selers")
           .select("*");
         getSelersList(selers);
+        console.log(selers);
       } catch (error) {
         console.log(error);
       }
@@ -35,7 +36,7 @@ const Selers = () => {
     <>
       <Grid container alignItems={"center"} justifyContent={"center"}>
         {selersList.map((seler) => (
-          <>
+          <React.Fragment key={seler.id}>
           <Div
             p={1}
             m={2}
@@ -53,7 +54,11 @@ const Selers = () => {
               alignItems={"center"}
               justifyContent={"space-between"}
               rowGap={3}
+              position={'relative'}
             >
+              <DetailSeler position={'absolute'}>
+                     {seler.seler}
+              </DetailSeler>
               <Grid
                 container
                 alignItems={"flex-start"}
@@ -93,9 +98,10 @@ const Selers = () => {
               </Button>
             </SelerBox>
           </Div>
-            <DetailSeler seler={seler} open={open} handleClose={handleClose} />
-          </>
+            
+          </React.Fragment>
         ))}
+        {/* <DetailSeler seler={selersList} open={open} handleClose={handleClose} /> */}
       </Grid>
     </>
   );

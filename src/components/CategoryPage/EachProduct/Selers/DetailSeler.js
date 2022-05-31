@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Backdrop,
   Box,
@@ -11,20 +11,24 @@ import {
 } from "@mui/material";
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
 
 const DetailSeler = ({ seler, open, handleClose }) => {
+  useEffect(()=>{
+    console.log(seler);
+  },[])
   return (
     <>
+    {seler.map((seler) => (
       <div>
         <Modal
           aria-labelledby="transition-modal-title"
@@ -38,9 +42,9 @@ const DetailSeler = ({ seler, open, handleClose }) => {
           }}
         >
           <Fade in={open}>
+          <Box sx={style}>
           <p>{seler.seler}</p>
           <Rating name="read-only" value={seler.score} readOnly />
-
           <Grid>
             <Grid>
               <p>ارسال به موقع</p>
@@ -55,9 +59,11 @@ const DetailSeler = ({ seler, open, handleClose }) => {
               <p>{seler.cancellation}</p>
             </Grid>
           </Grid>
+          </Box>
           </Fade>
         </Modal>
       </div>
+    ))}
     </>
   );
 };

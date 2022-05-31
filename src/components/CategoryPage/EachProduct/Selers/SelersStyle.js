@@ -21,3 +21,14 @@ margin-top : 8px;
 opacity : .6;
 color: #cd1c1c;
 `
+export const DetailSeler = styled(Grid)`
+width: 300px;
+height: 300px;
+background: #fff;
+border-radius: 3px;
+z-index: 1;
+// top:30px;
+left: 30px;
+margin: 30px;
+
+`

@@ -1,19 +1,23 @@
-import { Div, SelerBox, Title, Shop, Delivery,DetailSeler } from "./SelersStyle";
+import { Div, SelerBox, Title, Shop, Delivery } from "./SelersStyle";
 import React from "react";
 import { Grid, Rating, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import shop from "../../../../images/shop.png";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-// import DetailSeler from "./DetailSeler";
 
 const Selers = () => {
   const [selersList, getSelersList] = useState([]);
+  
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
- 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const supabase = createClient(
     "https://hzsqceossbxbfhtyrkme.supabase.co",
@@ -26,7 +30,6 @@ const Selers = () => {
           .from("selers")
           .select("*");
         getSelersList(selers);
-        console.log(selers);
       } catch (error) {
         console.log(error);
       }
@@ -41,13 +44,7 @@ const Selers = () => {
             p={1}
             m={2}
             key={seler.id}
-            onClick={handleOpen}
-            // item
-            // sx={12}
-            // sm={12}
-            // md={6}
-            // lg={6}
-            // xl={6}
+            onClick={handleClickOpen}
           >
             <SelerBox
               container
@@ -56,9 +53,7 @@ const Selers = () => {
               rowGap={3}
               position={'relative'}
             >
-              <DetailSeler position={'absolute'}>
-                     {seler.seler}
-              </DetailSeler>
+                   
               <Grid
                 container
                 alignItems={"flex-start"}
@@ -77,12 +72,10 @@ const Selers = () => {
                 </Grid>
               </Grid>
 
-              {/* <Grid> */}
               <Grid>
                 <Title>عضویت از {seler.status} قبل </Title>
                 <Rating name="read-only" value={seler.score} readOnly />
               </Grid>
-              {/* </Grid> */}
 
               <Button
                 startIcon={<AddShoppingCartOutlinedIcon />}
@@ -98,10 +91,8 @@ const Selers = () => {
               </Button>
             </SelerBox>
           </Div>
-            
           </React.Fragment>
         ))}
-        {/* <DetailSeler seler={selersList} open={open} handleClose={handleClose} /> */}
       </Grid>
     </>
   );

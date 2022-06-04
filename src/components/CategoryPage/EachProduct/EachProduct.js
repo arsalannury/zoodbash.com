@@ -35,7 +35,6 @@ import {
   TabPanel,
   a11yProps,
 } from "../../../Theme/ConfigMuiComponents/ConfigTabsComponent";
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FaceIcon from "@mui/icons-material/Face";
 
 import Prices from "../../../images/هزارتومان.png";

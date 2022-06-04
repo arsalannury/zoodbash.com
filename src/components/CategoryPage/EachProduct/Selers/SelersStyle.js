@@ -35,7 +35,7 @@ background: #fff;
 border-radius: 3px;
 z-index: 1;
 top:10px;
-left: 30px;
+right: 30px;
 position: absolute;
 opacity: 0;
 transition: all .8s ease;

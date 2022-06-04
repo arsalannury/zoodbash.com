@@ -8,7 +8,6 @@ import {
   More,
   Span,
   Percents,
-  SpanT,
 } from "./SelersStyle";
 import React from "react";
 import { Grid, Rating, Button, Typography, Divider, Box } from "@mui/material";
@@ -70,7 +69,7 @@ const Selers = () => {
                       {" "}
                       عضویت از {seler.status} پیش
                     </Typography>
-                    <Typography sx={{ color: "#38b000", margin: "15px 0" }}>
+                    <Typography sx={{ color: seler.situation === "عالی" ? "#38b000" : "#fca311", margin: "15px 0" }}>
                       {" "}
                       <Span>عملکرد</Span> {seler.situation}
                     </Typography>
@@ -94,8 +93,8 @@ const Selers = () => {
                      <Box sx={{width:"70%",margin:"5px 0 0 0"}}>
                      <CircularProgressbar
                         styles={buildStyles({
-                          pathColor: "#38b000",
-                          textColor: "#38b000",
+                          pathColor: seler.cancellation === 100 ? "#38b000" : "#fca311",
+                          textColor: seler.cancellation === 100 ? "#38b000" : "#fca311",
                         })}
                         strokeWidth={5}
                         text={seler.cancellation}
@@ -115,8 +114,8 @@ const Selers = () => {
                       <Box sx={{width:"70%",margin:"5px 0 0 0"}}>
                       <CircularProgressbar
                         styles={buildStyles({
-                          pathColor: "#38b000",
-                          textColor: "#38b000",
+                          pathColor: seler.referral === 100 ? "#38b000" : "#fca311",
+                          textColor: seler.referral === 100 ? "#38b000" : "#fca311",
                         })}
                         strokeWidth={5}
                         text={seler.referral}
@@ -136,8 +135,8 @@ const Selers = () => {
                       <Box sx={{width:"70%",margin:"5px 0 0 0"}}>
                       <CircularProgressbar
                         styles={buildStyles({
-                          pathColor: "#38b000",
-                          textColor: "#38b000",
+                          pathColor: seler.send === 100 ? "#38b000" : "#fca311",
+                          textColor: seler.send === 100 ? "#38b000" : "#fca311",
                         })}
                         strokeWidth={5}
                         text={seler.send}

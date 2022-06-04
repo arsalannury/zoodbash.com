@@ -11,7 +11,7 @@ import {
   SpanT,
 } from "./SelersStyle";
 import React from "react";
-import { Grid, Rating, Button, Typography, Divider } from "@mui/material";
+import { Grid, Rating, Button, Typography, Divider, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import shop from "../../../../images/shop.png";
@@ -58,7 +58,7 @@ const Selers = () => {
                   justifyContent={"space-around"}
                   flexDirection={"column"}
                 >
-                  <Typography>{seler.seler}</Typography>
+                  <Typography> فروشگاه {seler.seler}</Typography>
                   <Divider sx={{ width: "100%", margin: "10px 0 " }} />
                   <More
                     container
@@ -68,13 +68,14 @@ const Selers = () => {
                   >
                     <Typography sx={{ alignSelf: "center" }}>
                       {" "}
-                      عضویت از {seler.status}
+                      عضویت از {seler.status} پیش
                     </Typography>
                     <Typography sx={{ color: "#38b000", margin: "15px 0" }}>
                       {" "}
                       <Span>عملکرد</Span> {seler.situation}
                     </Typography>
                   </More>
+                  <Divider sx={{ width: "100%", margin: "10px 0 " }} />
                   <Percents
                     container
                     alignItems={"center"}
@@ -87,10 +88,11 @@ const Selers = () => {
                       justifyContent={"space-evenly"}
                       flexDirection={"column"}
                     >
-                      <Typography sx={{ fontSize: ".7em" }}>
+                      <Typography sx={{ fontSize: ".7em",color: "#999" }}>
                         بازگشت کالا{" "}
                       </Typography>
-                      <CircularProgressbar
+                     <Box sx={{width:"70%",margin:"5px 0 0 0"}}>
+                     <CircularProgressbar
                         styles={buildStyles({
                           pathColor: "#38b000",
                           textColor: "#38b000",
@@ -99,6 +101,7 @@ const Selers = () => {
                         text={seler.cancellation}
                         value={seler.cancellation}
                       />
+                     </Box>
                     </Grid>
                     <Grid
                       container
@@ -106,9 +109,10 @@ const Selers = () => {
                       justifyContent={"space-evenly"}
                       flexDirection={"column"}
                     >
-                      <Typography sx={{ fontSize: ".7em" }}>
+                      <Typography sx={{ fontSize: ".7em",color: "#999" }}>
                         لغو سفارش
                       </Typography>
+                      <Box sx={{width:"70%",margin:"5px 0 0 0"}}>
                       <CircularProgressbar
                         styles={buildStyles({
                           pathColor: "#38b000",
@@ -118,6 +122,7 @@ const Selers = () => {
                         text={seler.referral}
                         value={seler.referral}
                       />
+                      </Box>
                     </Grid>
                     <Grid
                       container
@@ -125,9 +130,10 @@ const Selers = () => {
                       justifyContent={"space-evenly"}
                       flexDirection={"column"}
                     >
-                      <Typography sx={{ fontSize: ".7em" }}>
+                      <Typography sx={{ fontSize: ".7em",color: "#999" }}>
                         ارسال به موقع
                       </Typography>
+                      <Box sx={{width:"70%",margin:"5px 0 0 0"}}>
                       <CircularProgressbar
                         styles={buildStyles({
                           pathColor: "#38b000",
@@ -137,6 +143,7 @@ const Selers = () => {
                         text={seler.send}
                         value={seler.send}
                       />
+                      </Box>
                     </Grid>
                   </Percents>
                 </DetailSeler>

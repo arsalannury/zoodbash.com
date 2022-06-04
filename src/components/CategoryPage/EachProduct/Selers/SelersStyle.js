@@ -10,11 +10,11 @@ export const Div = styled(Grid)`
 export const SelerBox = styled(Grid)`
 position: relative;
 transition: all .4s ease;
-// &:hover {
-//   .detail {
-//     opacity: 1;
-//   }
-// }
+&:hover {
+  .detail {
+    opacity: 1;
+  }
+}
 `;
 
 export const Title = styled.p`
@@ -34,10 +34,10 @@ width: 360px;
 background: #fff;
 border-radius: 3px;
 z-index: 1;
-top:30px;
+top:10px;
 left: 30px;
 position: absolute;
-// opacity: 0;
+opacity: 0;
 transition: all .8s ease;
 padding: 15px;
 box-shadow: 0 2px 3px #999;

@@ -1,23 +1,26 @@
-import { Div, SelerBox, Title, Shop, Delivery } from "./SelersStyle";
+import {
+  Div,
+  SelerBox,
+  Title,
+  Shop,
+  Delivery,
+  DetailSeler,
+  More,
+  Span,
+  Percents,
+  SpanT,
+} from "./SelersStyle";
 import React from "react";
-import { Grid, Rating, Button } from "@mui/material";
+import { Grid, Rating, Button, Typography, Divider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import shop from "../../../../images/shop.png";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Selers = () => {
   const [selersList, getSelersList] = useState([]);
-  
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const supabase = createClient(
     "https://hzsqceossbxbfhtyrkme.supabase.co",
@@ -40,57 +43,141 @@ const Selers = () => {
       <Grid container alignItems={"center"} justifyContent={"center"}>
         {selersList.map((seler) => (
           <React.Fragment key={seler.id}>
-          <Div
-            p={1}
-            m={2}
-            key={seler.id}
-            onClick={handleClickOpen}
-          >
-            <SelerBox
-              container
-              alignItems={"center"}
-              justifyContent={"space-between"}
-              rowGap={3}
-              position={'relative'}
-            >
-                   
-              <Grid
+            <Div p={1} m={2} key={seler.id}>
+              <SelerBox
                 container
-                alignItems={"flex-start"}
-                justifyContent={"flex-start"}
-                item
-                sx={12}
-                sm={12}
-                md={6}
-                lg={6}
-                xl={6}
+                alignItems={"center"}
+                justifyContent={"space-between"}
+                rowGap={3}
+                position={"relative"}
               >
-                <Shop src={shop} />
-                <Grid mr={2}>
-                  <Title>{seler.seler}</Title>
-                  <Delivery>{seler.delivery}</Delivery>
+                <DetailSeler
+                  className="detail"
+                  container
+                  alignItems={"center"}
+                  justifyContent={"space-around"}
+                  flexDirection={"column"}
+                >
+                  <Typography>{seler.seler}</Typography>
+                  <Divider sx={{ width: "100%", margin: "10px 0 " }} />
+                  <More
+                    container
+                    alignItems={"flex-start"}
+                    justifyContent={"space-around"}
+                    flexDirection={"column"}
+                  >
+                    <Typography sx={{ alignSelf: "center" }}>
+                      {" "}
+                      عضویت از {seler.status}
+                    </Typography>
+                    <Typography sx={{ color: "#38b000", margin: "15px 0" }}>
+                      {" "}
+                      <Span>عملکرد</Span> {seler.situation}
+                    </Typography>
+                  </More>
+                  <Percents
+                    container
+                    alignItems={"center"}
+                    justifyContent={"space-around"}
+                    flexWrap={"nowrap"}
+                  >
+                    <Grid
+                      container
+                      alignItems={"center"}
+                      justifyContent={"space-evenly"}
+                      flexDirection={"column"}
+                    >
+                      <Typography sx={{ fontSize: ".7em" }}>
+                        بازگشت کالا{" "}
+                      </Typography>
+                      <CircularProgressbar
+                        styles={buildStyles({
+                          pathColor: "#38b000",
+                          textColor: "#38b000",
+                        })}
+                        strokeWidth={5}
+                        text={seler.cancellation}
+                        value={seler.cancellation}
+                      />
+                    </Grid>
+                    <Grid
+                      container
+                      alignItems={"center"}
+                      justifyContent={"space-evenly"}
+                      flexDirection={"column"}
+                    >
+                      <Typography sx={{ fontSize: ".7em" }}>
+                        لغو سفارش
+                      </Typography>
+                      <CircularProgressbar
+                        styles={buildStyles({
+                          pathColor: "#38b000",
+                          textColor: "#38b000",
+                        })}
+                        strokeWidth={5}
+                        text={seler.referral}
+                        value={seler.referral}
+                      />
+                    </Grid>
+                    <Grid
+                      container
+                      alignItems={"center"}
+                      justifyContent={"space-evenly"}
+                      flexDirection={"column"}
+                    >
+                      <Typography sx={{ fontSize: ".7em" }}>
+                        ارسال به موقع
+                      </Typography>
+                      <CircularProgressbar
+                        styles={buildStyles({
+                          pathColor: "#38b000",
+                          textColor: "#38b000",
+                        })}
+                        strokeWidth={5}
+                        text={seler.send}
+                        value={seler.send}
+                      />
+                    </Grid>
+                  </Percents>
+                </DetailSeler>
+
+                <Grid
+                  container
+                  alignItems={"flex-start"}
+                  justifyContent={"flex-start"}
+                  item
+                  sx={12}
+                  sm={12}
+                  md={6}
+                  lg={6}
+                  xl={6}
+                >
+                  <Shop src={shop} />
+                  <Grid mr={2}>
+                    <Title>{seler.seler}</Title>
+                    <Delivery>{seler.delivery}</Delivery>
+                  </Grid>
                 </Grid>
-              </Grid>
 
-              <Grid>
-                <Title>عضویت از {seler.status} قبل </Title>
-                <Rating name="read-only" value={seler.score} readOnly />
-              </Grid>
+                <Grid>
+                  <Title>عضویت از {seler.status} قبل </Title>
+                  <Rating name="read-only" value={seler.score} readOnly />
+                </Grid>
 
-              <Button
-                startIcon={<AddShoppingCartOutlinedIcon />}
-                size={"small"}
-                sx={{
-                  marginTop: "0",
-                  "& .MuiButton-startIcon": { margin: "5px" },
-                }}
-                variant="outlined"
-                color="success"
-              >
-                افزودن به سبد خرید
-              </Button>
-            </SelerBox>
-          </Div>
+                <Button
+                  startIcon={<AddShoppingCartOutlinedIcon />}
+                  size={"small"}
+                  sx={{
+                    marginTop: "0",
+                    "& .MuiButton-startIcon": { margin: "5px" },
+                  }}
+                  variant="outlined"
+                  color="success"
+                >
+                  افزودن به سبد خرید
+                </Button>
+              </SelerBox>
+            </Div>
           </React.Fragment>
         ))}
       </Grid>
@@ -98,4 +185,4 @@ const Selers = () => {
   );
 };
 
-export const MemoSelers = React.memo(Selers);
+export default Selers;

@@ -7,7 +7,15 @@ export const Div = styled(Grid)`
   width:90%;
   cursor:pointer;
 `;
-export const SelerBox = styled(Grid)``;
+export const SelerBox = styled(Grid)`
+position: relative;
+transition: all .4s ease;
+// &:hover {
+//   .detail {
+//     opacity: 1;
+//   }
+// }
+`;
 
 export const Title = styled.p`
 color:#333;
@@ -22,13 +30,26 @@ opacity : .6;
 color: #cd1c1c;
 `
 export const DetailSeler = styled(Grid)`
-width: 300px;
-height: 300px;
+width: 360px;
 background: #fff;
 border-radius: 3px;
 z-index: 1;
-// top:30px;
+top:30px;
 left: 30px;
-margin: 30px;
-
+position: absolute;
+// opacity: 0;
+transition: all .8s ease;
+padding: 15px;
+box-shadow: 0 2px 3px #999;
 `
+export const More = styled(Grid)``;
+export const Percents = styled(Grid)`
+padding: 20px;
+text-align:center;
+`
+export const Span = styled.span`
+font-size : .9em;
+color : #000;
+`
+
+

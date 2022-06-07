@@ -8,7 +8,6 @@ export const useCommentContext = () => {
 
 const CommentContextProvider = ({ children }) => {
   const [comments, saveComments] = useState([]);
-
   const handleSaveComments = (data) => {
      setTimeout(() => {
     const newComments = [...comments];

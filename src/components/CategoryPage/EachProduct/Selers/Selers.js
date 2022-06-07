@@ -17,29 +17,37 @@ import shop from "../../../../images/shop.png";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import SelersListLoading from "../../../Loading/SelersListLoading";
 
 const Selers = () => {
   const [selersList, getSelersList] = useState([]);
+  const [isLoading,setLoading] = useState(false);
 
   const supabase = createClient(
     "https://hzsqceossbxbfhtyrkme.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6c3FjZW9zc2J4YmZodHlya21lIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTM0MTQ0MjUsImV4cCI6MTk2ODk5MDQyNX0.UU4r4sSVB2aN87UiivJlJHXy0rRRKgSmDLksonMSlOk"
   );
   useEffect(() => {
+    setLoading(true);
     (async function getData() {
       try {
         const { data: selers, error } = await supabase
           .from("selers")
           .select("*");
         getSelersList(selers);
+        setLoading(false);
       } catch (error) {
         console.log(error);
+        setLoading(true);
       }
     })();
   }, []);
   return (
     <>
-      <Grid container alignItems={"center"} justifyContent={"center"}>
+    {isLoading ? (
+      <SelersListLoading />
+    ) : (
+<Grid container alignItems={"center"} justifyContent={"center"}>
         {selersList.map((seler) => (
           <React.Fragment key={seler.id}>
             <Div p={1} m={2} key={seler.id}>
@@ -187,6 +195,8 @@ const Selers = () => {
           </React.Fragment>
         ))}
       </Grid>
+    )}
+      
     </>
   );
 };

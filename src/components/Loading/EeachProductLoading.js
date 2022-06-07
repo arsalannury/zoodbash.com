@@ -5,7 +5,7 @@ import { Grid } from "@mui/material";
 function EeachProductLoading() {
   return (
     <>
-      <Grid container alignItems={"center"}>
+      <Grid container alignItems={"center"} rowGap={4} pb={4}>
 
         <Grid item xs={12} sm={12} md={12} lg={6} xl={6} container alignItems={"center"} flexDirection={"column"}>
 
@@ -23,6 +23,12 @@ function EeachProductLoading() {
         <Skeleton height={25} style={{margin:"20px 0"}} />
         <Skeleton height={25} style={{margin:"20px 0"}} />
         <Skeleton height={25} style={{margin:"20px 0"}} />
+
+          <Grid position={"relative"}>
+            <Skeleton width={80} height={50} style={{position:"absolute",left:"0"}}/>
+            <Skeleton width={80} height={40} style={{position:"absolute",left:"0",marginTop:"50px"}}/>
+          </Grid>
+
         </Grid>
 
       </Grid>

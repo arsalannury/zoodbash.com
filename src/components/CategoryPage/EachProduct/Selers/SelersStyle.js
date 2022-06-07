@@ -15,6 +15,14 @@ transition: all .4s ease;
     opacity: 1;
   }
 }
+
+@media screen and (max-width:768px){
+  &:hover {
+    .detail {
+      opacity: 0;
+    }
+  }
+}
 `;
 
 export const Title = styled.p`

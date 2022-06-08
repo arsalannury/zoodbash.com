@@ -124,12 +124,12 @@ function EachProduct(props) {
             alignItems={"center"}
           >
             <ImageWrapper item container xs={12} sm={12} md={6} lg={6}>
-              <TopImageSection container justifyContent={"space-evenly"}>
+              <TopImageSection container >
                 <Actions
                   container
                   alignItems={"center"}
                   justifyContent={"space-around"}
-                  flexDirection={"column"}
+                  flexDirection={"column"}                 
                 >
                   <ShareIcon />
                   <FavoriteIcon />

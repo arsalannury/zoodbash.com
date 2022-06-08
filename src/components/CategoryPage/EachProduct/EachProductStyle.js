@@ -20,6 +20,11 @@ export const Actions = styled(Grid)`
   svg {
     cursor: pointer;
   }
+  @media screen and (max-width:361px){
+    width:100%;
+    flex-direction:row;
+    margin-bottom:30px;
+  }
 `;
 export const Title = styled.p`
   border-bottom: 1px solid #eee;
@@ -35,7 +40,11 @@ export const Description = styled.p`
 export const Price = styled.span`
   margin-left: 5px;
 `;
-export const TopImageSection = styled(Grid)``;
+export const TopImageSection = styled(Grid)`
+@media screen and (max-width:361px){
+  justify-content:center;
+}
+`;
 export const AnotherImages = styled(Grid)`
   margin: 90px 0 0 0;
 `;

@@ -184,6 +184,9 @@ const Selers = () => {
                   sx={{
                     marginTop: "0",
                     "& .MuiButton-startIcon": { margin: "5px" },
+                    "@media screen and (max-width:432px)" : {
+                      margin: "auto"
+                    }
                   }}
                   variant="outlined"
                   color="success"

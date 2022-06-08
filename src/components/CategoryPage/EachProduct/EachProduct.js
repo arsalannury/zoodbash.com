@@ -143,6 +143,7 @@ function EachProduct(props) {
                 container
                 alignItems={"center"}
                 justifyContent={"space-evenly"}
+                rowGap={4}
               >
                 <Boxx>
                   <AnotherImage src={product.image} />

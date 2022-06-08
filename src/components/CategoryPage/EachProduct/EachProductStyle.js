@@ -46,16 +46,16 @@ export const TopImageSection = styled(Grid)`
 }
 `;
 export const AnotherImages = styled(Grid)`
-  margin: 90px 0 0 0;
+  margin: 90px 0;
 `;
 export const Boxx = styled(Grid)`
-  box-shadow: 0 0 5px #ddd;
+  // box-shadow: 0 0 5px #ddd;
   border-radius: 10px;
   padding: 15px;
   cursor: pointer;
 `;
 export const AnotherImage = styled.img`
-  width: 130px;
+  width: 110px;
 `;
 export const BoxT = styled(Grid)`
   margin: 40px 0;

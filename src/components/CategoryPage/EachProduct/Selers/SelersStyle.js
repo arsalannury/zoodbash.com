@@ -17,11 +17,10 @@ transition: all .4s ease;
 }
 
 @media screen and (max-width:768px){
-  &:hover {
-    .detail {
-      opacity: 0;
-    }
+  .detail {
+    display:none;
   }
+  
 }
 `;
 

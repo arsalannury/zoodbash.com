@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Grid , Typography } from "@mui/material";
+import { Box, Grid , Typography } from "@mui/material";
 import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
@@ -47,7 +47,6 @@ function HocCategoryes(props) {
   }
 
   const clearAllFilter = () => {
-    // if(!oneToTwoFilter && !twoToFourFilter && !maxScoreFilter) return;
     setScoreFilter(category)
     setHelperFilter(category)
     setmaxScoreFilter(false)
@@ -66,7 +65,6 @@ function HocCategoryes(props) {
         setScoreFilter(response.data);
         getCategory(response.data);
         setLoading(false);
-        // console.log(response.data)
       } catch (error) {
         setLoading(true);
       }
@@ -131,9 +129,6 @@ function HocCategoryes(props) {
               md={3}
               lg={3}
               sx={{ position: "relative" }}
-              // container
-              // alignItems={'flex-start'}
-              // justifyContent={'center'}
             >
               <FilterProducts
                 checkboxOneToTwo={checkboxOneToTwo}
@@ -146,6 +141,18 @@ function HocCategoryes(props) {
                 rangeFilter={rangeFilter}
                 clearAllFilter={clearAllFilter}
               />
+
+
+              <Grid sx={{border:"1px solid #aaa"}}>
+              <Grid>
+                <Typography component={'h3'}>آخرین مشاهده</Typography>
+                <Box>
+                  
+                </Box>
+              </Grid>
+            </Grid>
+
+
             </Grid>
 
             <Grid

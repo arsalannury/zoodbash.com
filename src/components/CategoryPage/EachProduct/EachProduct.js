@@ -124,7 +124,7 @@ function EachProduct(props) {
             alignItems={"center"}
           >
             <ImageWrapper item container xs={12} sm={12} md={6} lg={6}>
-              <TopImageSection container >
+              <TopImageSection container justifyContent={"space-evenly"}>
                 <Actions
                   container
                   alignItems={"center"}

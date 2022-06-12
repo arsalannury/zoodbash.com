@@ -45,16 +45,3 @@ const CommentContextProvider = ({ children }) => {
 
 export default CommentContextProvider;
 
-// if(localStorage.getItem("comments")){
-//   JSON.parse(localStorage.getItem("comments")).forEach((item) => {
-//    localStorage.setItem(
-//      "comments",
-//     JSON.stringify([item])
-//  );
-//   })
-// }else {
-//  localStorage.setItem(
-//      "comments",
-//     JSON.stringify([...comments])
-//  );
-// }

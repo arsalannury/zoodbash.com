@@ -1,33 +1,39 @@
-import { useContext,createContext,useState } from "react";
+import { useContext, createContext, useState } from "react";
 
 const CacheContext = createContext({
-    cacheProduct:[{}]
+  cacheProduct: [{}],
 });
 
 export const useCacheContext = () => {
-    return useContext(CacheContext);
-}
+  return useContext(CacheContext);
+};
 
+const CacheProductContextProvider = ({ children }) => {
+  const [cacheProduct, setCacheProduct] = useState([]);
 
-const CacheProductContextProvider = ({children}) => {
-    
-    const [cacheProduct,setCacheProduct] = useState([]);
+  const setChacheState = (title, rating, id) => {
+    const shallowCopy = [...cacheProduct];
 
-    const setChacheState = (title,rating) => {
-        const shallowCopy = [...cacheProduct];
-        shallowCopy.push({title,rating});
-        setCacheProduct(shallowCopy);
+    for (let exist of shallowCopy) {
+      if (exist.id === id) return;
     }
 
-    return (
-        <>
-        <CacheContext.Provider
-        value={{setChacheState,cacheProduct}}
-        >
-            {children}
-        </CacheContext.Provider>
-        </>
-    )
-}
+    shallowCopy.push({ title, rating, id });
+
+    if (shallowCopy.length >= 6) {
+      shallowCopy.shift();
+    }
+
+    setCacheProduct(shallowCopy);
+  };
+
+  return (
+    <>
+      <CacheContext.Provider value={{ setChacheState, cacheProduct }}>
+        {children}
+      </CacheContext.Provider>
+    </>
+  );
+};
 
 export default CacheProductContextProvider;

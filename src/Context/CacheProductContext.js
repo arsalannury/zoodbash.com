@@ -15,7 +15,7 @@ const CacheProductContextProvider = ({ children }) => {
     const shallowCopy = [...cacheProduct];
 
     for (let exist of shallowCopy) {
-      if (exist.id === id) return;
+      if (exist.title === title) return;
     }
 
     shallowCopy.push({ title, rating, id });
@@ -25,6 +25,7 @@ const CacheProductContextProvider = ({ children }) => {
     }
 
     setCacheProduct(shallowCopy);
+    localStorage.setItem('cache',JSON.stringify(cacheProduct))
   };
 
   return (

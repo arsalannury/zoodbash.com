@@ -25,7 +25,7 @@ const CacheProductContextProvider = ({ children }) => {
     }
 
     setCacheProduct(shallowCopy);
-    localStorage.setItem('cache',JSON.stringify(cacheProduct))
+    localStorage.setItem('cache',JSON.stringify(shallowCopy))
   };
 
   return (

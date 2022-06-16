@@ -18,6 +18,14 @@ function HocCategoryes(props) {
   const [isPriceFilter,setIsPriceFilter] = useState(false)
   const [helperFilter,setHelperFilter] = useState([])
 
+  const handleShowCache = () => {
+    if(localStorage.getItem('cache')) {
+      // the "cache" local storage created in CacheProductContext.js
+      const getCacheLocalStorage = JSON.parse(localStorage.getItem('cache'));
+      
+    }
+  }
+
   const checkboxOneToTwo = (e) => {
     setOneToTwoFilter(e.target.checked);
   };
@@ -56,6 +64,7 @@ function HocCategoryes(props) {
 
   useEffect(() => {
    EnglishNumberToPersian()
+  //  handleShowCache()
   },[])
 
   useEffect(() => {

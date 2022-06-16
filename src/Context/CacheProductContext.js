@@ -11,14 +11,14 @@ export const useCacheContext = () => {
 const CacheProductContextProvider = ({ children }) => {
   const [cacheProduct, setCacheProduct] = useState([]);
 
-  const setChacheState = (title, rating, id) => {
+  const setChacheState = (title, rating) => {
     const shallowCopy = [...cacheProduct];
 
     for (let exist of shallowCopy) {
       if (exist.title === title) return;
     }
 
-    shallowCopy.push({ title, rating, id });
+    shallowCopy.push({ title,rating });
 
     if (shallowCopy.length >= 6) {
       shallowCopy.shift();

@@ -1,12 +1,13 @@
 import Skeleton from "react-loading-skeleton";
 import { Grid } from "@mui/material";
+import React from 'react';
 
 function CategoryLoading() {
   return Array(6)
     .fill({})
-    .map(() => {
+    .map((n,index) => {
       return (
-        <>
+        <React.Fragment key={index}>
           <Grid
             sx={{ margin: "0 0 15px 0" }}
             container
@@ -32,7 +33,7 @@ function CategoryLoading() {
             <Skeleton count={1} width={130} height={20} style={{margin: '15px 0'}} />
             </div>
           </Grid>
-        </>
+        </React.Fragment>
       );
     });
 }

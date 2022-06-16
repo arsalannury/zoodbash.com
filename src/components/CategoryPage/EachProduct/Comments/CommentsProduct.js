@@ -94,7 +94,7 @@ export default function CommentsProduct() {
                   </>
                 ))}
               {comments.map((item, index) => (
-                <>
+                <React.Fragment key={index}>
                   <ListItem alignItems="flex-start" key={index}>
                     <ListItemAvatar>
                       <Avatar
@@ -120,7 +120,7 @@ export default function CommentsProduct() {
                     />
                   </ListItem>
                   <Divider variant="inset" component="li" />
-                </>
+                </React.Fragment>
               ))}
             </List>
 

@@ -87,16 +87,16 @@ const Footer = () => {
             justifyContent={"space-evenly"}
           >
             <Social>
-              <i class="bi bi-twitter social_icon"></i>
+              <i className="bi bi-twitter social_icon"></i>
             </Social>
             <Social>
-              <i class="bi bi-instagram social_icon"></i>
+              <i className="bi bi-instagram social_icon"></i>
             </Social>
             <Social>
-              <i class="bi bi-telegram social_icon"></i>
+              <i className="bi bi-telegram social_icon"></i>
             </Social>
             <Social>
-              <i class="bi bi-linkedin social_icon"></i>
+              <i className="bi bi-linkedin social_icon"></i>
             </Social>
           </Socials>
           <Hr />

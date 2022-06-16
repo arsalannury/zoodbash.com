@@ -82,7 +82,7 @@ const CommentsAds = () => {
             flexDirection={"column"}
           >
             {comments.map((cmt, index) => (
-              <Slides top>
+              <Slides top key={index}>
               <SingleComment
                 key={index}
                 container

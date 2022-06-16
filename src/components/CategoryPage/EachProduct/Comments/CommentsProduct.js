@@ -62,8 +62,8 @@ export default function CommentsProduct() {
             >
               {Array(showComment)
                 .fill({})
-                .map(() => (
-                  <>
+                .map((nothing,index) => (
+                  <React.Fragment key={index}>
                     {/* {++CommentIndex} */}
 
                     <ListItem alignItems="flex-start">
@@ -91,7 +91,7 @@ export default function CommentsProduct() {
                       />
                     </ListItem>
                     <Divider variant="inset" component="li" />
-                  </>
+                  </React.Fragment>
                 ))}
               {comments.map((item, index) => (
                 <React.Fragment key={index}>

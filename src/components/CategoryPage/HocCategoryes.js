@@ -1,11 +1,10 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { Box, Grid , Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Grid, Typography } from "@mui/material";
 import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
 import { EnglishNumberToPersian } from "../ToPersian/EnglishNumberToPersian";
-
 
 function HocCategoryes(props) {
   const [category, getCategory] = useState([]);
@@ -14,17 +13,32 @@ function HocCategoryes(props) {
   const [oneToTwoFilter, setOneToTwoFilter] = useState(false);
   const [twoToFourFilter, setTwoToFourFilter] = useState(false);
   const [maxScoreFilter, setmaxScoreFilter] = useState(false);
-  const [rangeFilter,setRangeFilter] = useState([]);
-  const [isPriceFilter,setIsPriceFilter] = useState(false)
-  const [helperFilter,setHelperFilter] = useState([])
+  const [rangeFilter, setRangeFilter] = useState([]);
+  const [isPriceFilter, setIsPriceFilter] = useState(false);
+  const [helperFilter, setHelperFilter] = useState([]);
 
   const handleShowCache = () => {
-    if(localStorage.getItem('cache')) {
-      // the "cache" local storage created in CacheProductContext.js
-      const getCacheLocalStorage = JSON.parse(localStorage.getItem('cache'));
-      
+    if (localStorage.getItem("cache")) {
+      // * the "cache" local storage created in CacheProductContext.js
+      const getCacheLocalStorage = JSON.parse(localStorage.getItem("cache"));
+
+      return getCacheLocalStorage.map(
+        (cacheProduct, index) => (
+          <React.Fragment key={index}>
+            <Box>
+             <Grid container alignItems={'center'} justifyContent={"center"} flexDirection={"column"} p={2}>
+             <img src={cacheProduct.image} style={{width:"80px",alignSelf:'flex-end'}}  />
+             <Typography sx={{fontSize:".7em",textAlign:"left"}} >{cacheProduct.title}</Typography>
+             </Grid>
+
+
+              {/* <Typography>{cacheProduct.rating.rate}</Typography> */}
+            </Box>
+          </React.Fragment>
+        )
+      );
     }
-  }
+  };
 
   const checkboxOneToTwo = (e) => {
     setOneToTwoFilter(e.target.checked);
@@ -37,35 +51,40 @@ function HocCategoryes(props) {
   };
 
   const rangeOnInputHandler = (e) => {
-    // handle filter products with price range 
+    // handle filter products with price range
     // handle in two state . first is when score filter is off
     // and second is when user enable score filter
-    setIsPriceFilter(true)
-    setHelperFilter(category.filter(elements => elements.price <= e.target.value))
-    if(!oneToTwoFilter && !twoToFourFilter && !maxScoreFilter) {
-      setScoreFilter(category.filter(elements => elements.price <= e.target.value))
-    }else {
-      if(scoreFilter.find(elements => elements.price <= e.target.value)){
-        setScoreFilter(rangeFilter.filter(elements => elements.price <= e.target.value))
-      }else{
-        setScoreFilter(rangeFilter)
+    setIsPriceFilter(true);
+    setHelperFilter(
+      category.filter((elements) => elements.price <= e.target.value)
+    );
+    if (!oneToTwoFilter && !twoToFourFilter && !maxScoreFilter) {
+      setScoreFilter(
+        category.filter((elements) => elements.price <= e.target.value)
+      );
+    } else {
+      if (scoreFilter.find((elements) => elements.price <= e.target.value)) {
+        setScoreFilter(
+          rangeFilter.filter((elements) => elements.price <= e.target.value)
+        );
+      } else {
+        setScoreFilter(rangeFilter);
       }
     }
-   
-  }
+  };
 
   const clearAllFilter = () => {
-    setScoreFilter(category)
-    setHelperFilter(category)
-    setmaxScoreFilter(false)
-    setTwoToFourFilter(false)
-    setOneToTwoFilter(false)
-  }
+    setScoreFilter(category);
+    setHelperFilter(category);
+    setmaxScoreFilter(false);
+    setTwoToFourFilter(false);
+    setOneToTwoFilter(false);
+  };
 
   useEffect(() => {
-   EnglishNumberToPersian()
-  //  handleShowCache()
-  },[])
+    EnglishNumberToPersian();
+    //  handleShowCache()
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,42 +101,95 @@ function HocCategoryes(props) {
   }, []);
 
   useEffect(() => {
-
     // range filter save for us the last state after we use score filter and we use that when price filter start change
     // this useEffect handle score filter in all situation
     if (oneToTwoFilter) {
-      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 2.5));
-      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 2.5));
-      setRangeFilter(category.filter((elements) => elements.rating.rate <= 2.5));
+      if (!isPriceFilter)
+        setScoreFilter(
+          category.filter((elements) => elements.rating.rate <= 2.5)
+        );
+      else
+        setScoreFilter(
+          scoreFilter.filter((elements) => elements.rating.rate <= 2.5)
+        );
+      setRangeFilter(
+        category.filter((elements) => elements.rating.rate <= 2.5)
+      );
     } else if (twoToFourFilter) {
-      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5))
-      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
-      setRangeFilter( category.filter((elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5));
+      if (!isPriceFilter)
+        setScoreFilter(
+          category.filter(
+            (elements) =>
+              elements.rating.rate <= 4 && elements.rating.rate > 2.5
+          )
+        );
+      else
+        setScoreFilter(
+          scoreFilter.filter(
+            (elements) =>
+              elements.rating.rate <= 4 && elements.rating.rate > 2.5
+          )
+        );
+      setRangeFilter(
+        category.filter(
+          (elements) => elements.rating.rate <= 4 && elements.rating.rate > 2.5
+        )
+      );
     } else if (maxScoreFilter) {
-      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate > 4))
-      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate > 4));
+      if (!isPriceFilter)
+        setScoreFilter(category.filter((elements) => elements.rating.rate > 4));
+      else
+        setScoreFilter(
+          scoreFilter.filter((elements) => elements.rating.rate > 4)
+        );
       setRangeFilter(category.filter((elements) => elements.rating.rate > 4));
     } else {
-      if(!isPriceFilter) setScoreFilter(category);
-      else setScoreFilter(helperFilter)
+      if (!isPriceFilter) setScoreFilter(category);
+      else setScoreFilter(helperFilter);
       setRangeFilter(category);
     }
 
     if (oneToTwoFilter && twoToFourFilter) {
-      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate <= 4));
-      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate <= 4));
+      if (!isPriceFilter)
+        setScoreFilter(
+          category.filter((elements) => elements.rating.rate <= 4)
+        );
+      else
+        setScoreFilter(
+          scoreFilter.filter((elements) => elements.rating.rate <= 4)
+        );
       setRangeFilter(category.filter((elements) => elements.rating.rate <= 4));
     } else if (oneToTwoFilter && maxScoreFilter) {
-      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
-      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
-      setRangeFilter(category.filter((elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5));
+      if (!isPriceFilter)
+        setScoreFilter(
+          category.filter(
+            (elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5
+          )
+        );
+      else
+        setScoreFilter(
+          scoreFilter.filter(
+            (elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5
+          )
+        );
+      setRangeFilter(
+        category.filter(
+          (elements) => elements.rating.rate > 4 || elements.rating.rate < 2.5
+        )
+      );
     } else if (twoToFourFilter && maxScoreFilter) {
-      if(!isPriceFilter) setScoreFilter(category.filter((elements) => elements.rating.rate > 2.5));
-      else setScoreFilter(scoreFilter.filter((elements) => elements.rating.rate > 2.5));
+      if (!isPriceFilter)
+        setScoreFilter(
+          category.filter((elements) => elements.rating.rate > 2.5)
+        );
+      else
+        setScoreFilter(
+          scoreFilter.filter((elements) => elements.rating.rate > 2.5)
+        );
       setRangeFilter(category.filter((elements) => elements.rating.rate > 2.5));
     }
     if (oneToTwoFilter && twoToFourFilter && maxScoreFilter) {
-      if(!isPriceFilter) setScoreFilter(category);
+      if (!isPriceFilter) setScoreFilter(category);
       else setScoreFilter(helperFilter);
       setRangeFilter(category);
     }
@@ -130,7 +202,6 @@ function HocCategoryes(props) {
           <CategoryLoading />
         ) : (
           <>
-
             <Grid
               item
               xs={0}
@@ -151,17 +222,10 @@ function HocCategoryes(props) {
                 clearAllFilter={clearAllFilter}
               />
 
-
-              <Grid sx={{border:"1px solid #aaa"}}>
-              <Grid>
-                <Typography component={'h3'}>آخرین مشاهده</Typography>
-                <Box>
-                  
-                </Box>
+              <Grid sx={{ border: "1px solid #aaa" , width:'380px' }}>
+                  <Typography component={"h3"}>آخرین مشاهده</Typography>
+                  {handleShowCache()}
               </Grid>
-            </Grid>
-
-
             </Grid>
 
             <Grid
@@ -177,22 +241,27 @@ function HocCategoryes(props) {
             >
               {/* when we don't have any products to show in page update with this message */}
               {scoreFilter.length === 0 ? (
-                <Typography color={'#14213d'} fontFamily={"unset"} fontSize={'.9em'} component={'span'}>
-               محصولی برای نمایش وجود ندارد                        
+                <Typography
+                  color={"#14213d"}
+                  fontFamily={"unset"}
+                  fontSize={".9em"}
+                  component={"span"}
+                >
+                  محصولی برای نمایش وجود ندارد
                 </Typography>
               ) : (
                 scoreFilter.map((product) => (
                   <CardProducts
-                  key={product.id}
-                  title={product.title}
-                  image={product.image}
-                  price={product.price}
-                  rating={product.rating}
-                  id={product.id}
-                  category={product.category}
-                />
-                )
-              ))}
+                    key={product.id}
+                    title={product.title}
+                    image={product.image}
+                    price={product.price}
+                    rating={product.rating}
+                    id={product.id}
+                    category={product.category}
+                  />
+                ))
+              )}
             </Grid>
           </>
         )}

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
@@ -16,26 +16,41 @@ function HocCategoryes(props) {
   const [rangeFilter, setRangeFilter] = useState([]);
   const [isPriceFilter, setIsPriceFilter] = useState(false);
   const [helperFilter, setHelperFilter] = useState([]);
+  const [showCacheSection,setShowCacheSection] = useState(false);
 
   const handleShowCache = () => {
     if (localStorage.getItem("cache")) {
       // * the "cache" local storage created in CacheProductContext.js
       const getCacheLocalStorage = JSON.parse(localStorage.getItem("cache"));
 
-      return getCacheLocalStorage.map(
-        (cacheProduct, index) => (
-          <React.Fragment key={index}>
-            <Box>
-             <Grid container alignItems={'center'} justifyContent={"center"} flexDirection={"column"} p={2}>
-             <img src={cacheProduct.image} style={{width:"80px",alignSelf:'flex-end'}}  />
-             <Typography sx={{fontSize:".7em",textAlign:"left"}} >{cacheProduct.title}</Typography>
-             </Grid>
-
-
-              {/* <Typography>{cacheProduct.rating.rate}</Typography> */}
-            </Box>
-          </React.Fragment>
-        )
+      return getCacheLocalStorage.map((cacheProduct, index) => (
+        <React.Fragment key={index}>
+          <Box p={2}>
+            <Grid
+              container
+              alignItems={"center"}
+              justifyContent={"center"}
+              flexDirection={"column"}
+            >
+              <img
+                src={cacheProduct.image}
+                style={{
+                  width: "80px",
+                  alignSelf: "center",
+                  marginBottom: "5px",
+                }}
+              />
+              <Typography sx={{ fontSize: ".7em", textAlign: "left" }}>
+                {cacheProduct.title}
+              </Typography>
+            </Grid>
+            <Divider />
+          </Box>
+        </React.Fragment>
+      ));
+    } else {
+      return (
+        <Typography component={"h2"}>محصولی برای نمایش وجود ندارد</Typography>
       );
     }
   };
@@ -49,6 +64,10 @@ function HocCategoryes(props) {
   const checkboxMaxScore = (e) => {
     setmaxScoreFilter(e.target.checked);
   };
+
+  const handleStateShowCache = () => {
+    setShowCacheSection()
+  }
 
   const rangeOnInputHandler = (e) => {
     // handle filter products with price range
@@ -222,9 +241,25 @@ function HocCategoryes(props) {
                 clearAllFilter={clearAllFilter}
               />
 
-              <Grid sx={{ border: "1px solid #aaa" , width:'380px' }}>
-                  <Typography component={"h3"}>آخرین مشاهده</Typography>
-                  {handleShowCache()}
+              <Grid
+                sx={{
+                  width: "295px",
+                  margin: "50px auto",
+                  border: "1px solid #eee",
+                  padding: "10px",
+                  "@media screen and (max-width:899px)": {
+                   transform:"translateX(300%)",
+                  //  display:"none"
+                  },
+                }}
+              >
+                <Typography
+                  sx={{ fontFamily: "unset", textAlign: "center" }}
+                  component={"h3"}
+                >
+                  مشاهدات اخیر شما
+                </Typography>
+                {handleShowCache()}
               </Grid>
             </Grid>
 

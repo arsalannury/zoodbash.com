@@ -2,6 +2,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import HistoryIcon from '@mui/icons-material/History';
 import { EnglishNumberToPersian } from "../../ToPersian/EnglishNumberToPersian";
 import {
   ButtonFilter,
@@ -83,8 +84,9 @@ function FilterProducts({
   return (
     <>
 
-     <ButtonFilter onClick={FilterShowHandler}>
-        <FilterListIcon />
+     <ButtonFilter >
+        <FilterListIcon onClick={FilterShowHandler} />
+        <HistoryIcon sx={{margin:"0 20px"}} />
       </ButtonFilter>
 
       <Wrapper

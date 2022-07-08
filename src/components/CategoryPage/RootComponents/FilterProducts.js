@@ -27,7 +27,7 @@ import {
   Thlabel,
   To,
   Wrapper,
-} from "./FilterProductsStyle";
+} from "./styles/FilterProductsStyle";
 
 const theme = createTheme({
   components: {

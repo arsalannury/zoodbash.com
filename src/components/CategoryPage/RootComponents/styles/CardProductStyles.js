@@ -96,7 +96,7 @@ export const Footer = styled(Grid)``;
 export const Btn = styled(Button)`
   font-family: unset;
   font-size: 0.7em;
-  width: 70%;
+  width: 100%;
   position:relative;
 `;
 export const Information = styled(Grid)``;

@@ -9,7 +9,15 @@ export const useCacheContext = () => {
 };
 
 const CacheProductContextProvider = ({ children }) => {
-  const [cacheProduct, setCacheProduct] = useState([]);
+  const [cacheProduct, setCacheProduct] = useState(
+    () => {
+      if(localStorage.getItem('cache')) {
+       return JSON.parse(localStorage.getItem('cache'));
+      }else {
+        return [];
+      }
+    }
+  );
 
   const setChacheState = (title, rating,image) => {
     const shallowCopy = [...cacheProduct];

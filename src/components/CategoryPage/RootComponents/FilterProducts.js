@@ -1,8 +1,10 @@
 import Tooltip from "@mui/material/Tooltip";
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import HistoryIcon from '@mui/icons-material/History';
+import HistoryIcon from "@mui/icons-material/History";
+import { useCacheContext } from "../../../Context/CacheProductContext";
 import { EnglishNumberToPersian } from "../../ToPersian/EnglishNumberToPersian";
 import {
   ButtonFilter,
@@ -51,21 +53,24 @@ function FilterProducts({
   twoToFourFilter,
   maxScoreFilter,
   rangeOnInputHandler,
-  clearAllFilter
+  clearAllFilter,
 }) {
   const [rangeValue, setRangeValue] = useState(0);
   const [filterShow, setFilterShow] = useState("translateX(300%)");
   const [overflowShow, setOverflowShow] = useState(false);
   const [filterHeight, setFilterHeight] = useState("450px");
   const [positionFilter, setPositionFilter] = useState("absolute");
-  const [widthFilter, setWidthFilter] = useState("300px");
+  const [widthFilter, setWidthFilter] = useState("90%");
+  const { handleStateShowCache, isCacheOpen, handleFilterOpen } =
+    useCacheContext();
 
   useEffect(() => {
     EnglishNumberToPersian();
   }, []);
 
   const FilterShowHandler = () => {
-    setWidthFilter(widthFilter === "300px" ? "100vw" : "300px");
+    if(isCacheOpen) return;
+    setWidthFilter(widthFilter === "90%" ? "100vw" : "90%");
     setFilterShow(
       filterShow === "translateX(300%)" ? "none" : "translateX(300%)"
     );
@@ -73,20 +78,23 @@ function FilterProducts({
     setOverflowShow(overflowShow === false ? true : false);
     if (!overflowShow) document.body.classList.add("body_when_filter_show");
     else document.body.classList.remove("body_when_filter_show");
+
+    handleFilterOpen();
   };
 
   const rangeHandler = (e) => {
     setRangeValue(e.target.value);
   };
 
-  
-
   return (
     <>
-
-     <ButtonFilter >
-        <FilterListIcon onClick={FilterShowHandler} />
-        <HistoryIcon sx={{margin:"0 20px"}} />
+      <ButtonFilter variant="normal" aria-label="normal button group">
+        <Button>
+          <FilterListIcon onClick={FilterShowHandler} />
+        </Button>
+        <Button onClick={handleStateShowCache}>
+          <HistoryIcon sx={{ margin: "0 20px" }} />
+        </Button>
       </ButtonFilter>
 
       <Wrapper
@@ -96,7 +104,7 @@ function FilterProducts({
         sx={{
           transform: "none",
           position: "none",
-          width: "300px",
+          width: "90%",
           height: "450px",
           "@media screen and (max-width : 899px)": {
             transform: filterShow,
@@ -182,7 +190,6 @@ function FilterProducts({
               <Thlabel htmlFor={"check3"}>بیشترین امتیاز</Thlabel>
               <ThcheckBox
                 className="aa"
-                
                 type={"checkbox"}
                 id="check3"
                 value="maxscore"

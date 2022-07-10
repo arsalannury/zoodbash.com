@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, ButtonGroup } from "@mui/material";
 
 export const Wrapper = styled(Grid)`
   border: 1px solid #eee;
@@ -124,7 +124,7 @@ export const ClearFilters = styled.button`
 export const Div = styled.div`
 width:100%;
 `
-export const ButtonFilter = styled(Button)`
+export const ButtonFilter = styled(ButtonGroup)`
   display: none;
   align-self: flex-start;
   @media screen and (max-width: 899px) {

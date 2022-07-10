@@ -4,6 +4,7 @@ import { Box, Divider, Grid, Typography } from "@mui/material";
 import FilterProducts from "./RootComponents/FilterProducts";
 import CategoryLoading from "../Loading/Categoryes/CategoryLoading";
 import CardProducts from "./RootComponents/CardProducts";
+import { useCacheContext } from "../../Context/CacheProductContext";
 import { EnglishNumberToPersian } from "../ToPersian/EnglishNumberToPersian";
 
 function HocCategoryes(props) {
@@ -16,7 +17,12 @@ function HocCategoryes(props) {
   const [rangeFilter, setRangeFilter] = useState([]);
   const [isPriceFilter, setIsPriceFilter] = useState(false);
   const [helperFilter, setHelperFilter] = useState([]);
-  const [showCacheSection,setShowCacheSection] = useState(false);
+  const {
+    filterShow,
+    positionFilter,
+    widthFilter,
+    filterHeight,
+  } = useCacheContext();
 
   const handleShowCache = () => {
     if (localStorage.getItem("cache")) {
@@ -64,10 +70,6 @@ function HocCategoryes(props) {
   const checkboxMaxScore = (e) => {
     setmaxScoreFilter(e.target.checked);
   };
-
-  const handleStateShowCache = () => {
-    setShowCacheSection()
-  }
 
   const rangeOnInputHandler = (e) => {
     // handle filter products with price range
@@ -243,13 +245,22 @@ function HocCategoryes(props) {
 
               <Grid
                 sx={{
-                  width: "295px",
                   margin: "50px auto",
                   border: "1px solid #eee",
                   padding: "10px",
+                  transition: "all .5s ease",
+                  transform: "none",
+                  position: "none",
+                  width: "90%",
+                  height: "unset",
+                  zIndex:'100',
+                  background: "#fff",
                   "@media screen and (max-width:899px)": {
-                   transform:"translateX(300%)",
-                  //  display:"none"
+                    transform: filterShow,
+                    position: positionFilter,
+                    width: widthFilter,
+                    height: filterHeight,
+                    margin: "0 auto"
                   },
                 }}
               >

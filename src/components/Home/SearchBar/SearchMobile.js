@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import SearchIcon from "@mui/icons-material/Search";
 import { Button, Backdrop } from "@mui/material";
 import { useState } from "react";
 import {BtnSearchIcon,Div,Icon,Input,SearchBar,SearchIconMobile} from './styles/SearchMobileStyle';

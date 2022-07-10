@@ -48,7 +48,7 @@ const Selers = () => {
       <SelersListLoading />
     ) : (
 <Grid container alignItems={"center"} justifyContent={"center"}>
-        {selersList.map((seler) => (
+        {selersList && selersList.map((seler) => (
           <React.Fragment key={seler.id}>
             <Div p={1} m={2} key={seler.id}>
               <SelerBox

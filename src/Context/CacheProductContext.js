@@ -26,10 +26,6 @@ const CacheProductContextProvider = ({ children }) => {
   const [isFilterOpen,setIsFilter] = useState(false);
 
 
-  // const handleCacheOpen = () => {
-  //   setIsCacheOpen(!isCacheOpen);
-  // }
-
   const handleFilterOpen = () => {
     setIsFilter(!isFilterOpen);
   }

@@ -8,14 +8,11 @@ import EachProduct from "./CategoryPage/EachProduct/EachProduct";
 import Footer from "./Home/Footer/Footer";
 import { Switch, Route } from "react-router-dom";
 import "../index.css";
-import { useSearchContext } from "../Context/SearchContext";
 
 const App = () => {
-  const {returnSearchResults} = useSearchContext();
   return (
     <>
       <Header />
-      {returnSearchResults()}
       <Switch>
         <Route path={"/"} exact component={Home} />
         <Route path={"/electronics/:id"} component={EachProduct} />

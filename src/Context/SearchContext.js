@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import {Grid} from '@mui/material';
+import React, { createContext, useContext, useState } from "react";
+import { Grid } from "@mui/material";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const SearchContext = createContext({});
 
@@ -12,12 +13,8 @@ const SearchContextProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(false);
   const [searchHandle, setSearchHandle] = useState([]);
 
-
   const handleRequestForSeach = async (event) => {
-
-
-    if (!event.target.value || event.target.value === "") {
-      setLoading(false);
+    if (event.target.value.trim().length === 0 || !event.target.value) {
       setSearchHandle([]);
       return;
     }
@@ -34,7 +31,6 @@ const SearchContextProvider = ({ children }) => {
         });
       });
       setLoading(false);
-      console.log(searchHandle);
     } catch (error) {
       setLoading(true);
     }
@@ -44,12 +40,14 @@ const SearchContextProvider = ({ children }) => {
     return searchHandle.map((product, index) => (
       <React.Fragment key={product.id}>
         <Grid container alignItems={"center"} justifyContent={"space-evenly"}>
-            <Grid>
-                <img src={product.image} alt=""  style={{width:"50px"}} />
-            </Grid>
-            <Grid>
-                <p>{product.title}</p>
-            </Grid>
+          <Grid>
+            <Link to={`/${product.category}/${product.id}`}>
+              <img src={product.image} alt="" style={{ width: "50px" }} />
+            </Link>
+          </Grid>
+          <Grid>
+            <p>{product.title}</p>
+          </Grid>
         </Grid>
       </React.Fragment>
     ));
@@ -61,7 +59,7 @@ const SearchContextProvider = ({ children }) => {
         handleRequestForSeach,
         returnSearchResults,
         searchHandle,
-        isLoading
+        isLoading,
       }}
     >
       {children}

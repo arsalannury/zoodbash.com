@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { Grid } from "@mui/material";
+import { Divider, Grid } from "@mui/material";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -39,16 +39,17 @@ const SearchContextProvider = ({ children }) => {
   function returnSearchResults() {
     return searchHandle.map((product, index) => (
       <React.Fragment key={product.id}>
-        <Grid container alignItems={"center"} justifyContent={"space-evenly"}>
+        <Grid container alignItems={"flex-start"} justifyContent={"flex-start"} flexDirection={"column"} my={3}>
           <Grid>
             <Link to={`/${product.category}/${product.id}`}>
-              <img src={product.image} alt="" style={{ width: "50px" }} />
+              <img src={product.image} alt="" style={{ width: "80px" }} />
             </Link>
           </Grid>
           <Grid>
-            <p>{product.title}</p>
+            <p style={{fontSize:".8em",color:"#666"}}>{product.title}</p>
           </Grid>
         </Grid>
+        <Divider sx={{width:"100%",margin:"15px 0"}} />
       </React.Fragment>
     ));
   }

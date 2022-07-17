@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import {
   Div,
   GridImages,
@@ -68,27 +68,44 @@ const Search = () => {
               position: "absolute",
               background: "#fff",
               width: "300px",
-              minHeight: "200px",
+              maxHeight: "400px",
               top: "100px",
+              borderRadius: "3px",
               zIndex: "99",
               right: "30px",
               padding: "10px",
-              boxShadow: "0 0 5px #555",
+              overflowY: "auto",
+              boxShadow: "0 0 5px #eee",
+              "&::-webkit-scrollbar": {
+                width: "8px",
+              },
+              "&::-webkit-scrollbar-track": {
+                background: "#f1f1f1",
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "#aaa",
+              },
             }}
           >
             {isLoading ? (
               <>
                 <div
-                  style={{ width: "100%", position: "absolute", top: "3px", right:'0' }}
+                  style={{
+                    width: "100%",
+                    position: "absolute",
+                    top: "3px",
+                    right: "0",
+                  }}
                 >
                   <LinearProgress />
                 </div>
               </>
             ) : (
               <>
-                <Typography sx={{ fontFamily: "unset" }}>
+                <Typography sx={{ fontFamily: "unset",textAlign:"center",margin:"auto",fontSize:".9em" }}>
                   نتایج سرچ محصولات
                 </Typography>
+                <Divider sx={{width:"100%",margin:"15px 0"}} />
                 {returnSearchResults()}
               </>
             )}

@@ -12,6 +12,19 @@ export const useSearchContext = () => {
 const SearchContextProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(false);
   const [searchHandle, setSearchHandle] = useState([]);
+  const [isInSmallScreen, setSmallScrren] = useState(false);
+  const [isInLargeScreen, setLageScrren] = useState(false);
+  const [componentName, setcomponentName] = useState(null);
+
+  const handleScreenSizeSearch = (componentName) => {
+    if (componentName === "search") {
+      setLageScrren(true);
+      setSmallScrren(false);
+    } else if (componentName === "searchMobile") {
+      setSmallScrren(true);
+      setLageScrren(false);
+    }
+  };
 
   const handleRequestForSeach = async (event) => {
     if (event.target.value.trim().length === 0 || !event.target.value) {
@@ -39,17 +52,23 @@ const SearchContextProvider = ({ children }) => {
   function returnSearchResults() {
     return searchHandle.map((product, index) => (
       <React.Fragment key={product.id}>
-        <Grid container alignItems={"flex-start"} justifyContent={"flex-start"} flexDirection={"column"} my={3}>
+        <Grid
+          container
+          alignItems={"flex-start"}
+          justifyContent={"flex-start"}
+          flexDirection={"column"}
+          my={3}
+        >
           <Grid>
             <Link to={`/${product.category}/${product.id}`}>
               <img src={product.image} alt="" style={{ width: "80px" }} />
             </Link>
           </Grid>
           <Grid>
-            <p style={{fontSize:".8em",color:"#666"}}>{product.title}</p>
+            <p style={{ fontSize: ".8em", color: "#666" }}>{product.title}</p>
           </Grid>
         </Grid>
-        <Divider sx={{width:"100%",margin:"15px 0"}} />
+        <Divider sx={{ width: "100%", margin: "15px 0" }} />
       </React.Fragment>
     ));
   }
@@ -59,7 +78,10 @@ const SearchContextProvider = ({ children }) => {
       value={{
         handleRequestForSeach,
         returnSearchResults,
+        handleScreenSizeSearch,
         searchHandle,
+        isInSmallScreen,
+        isInLargeScreen,
         isLoading,
       }}
     >

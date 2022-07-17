@@ -11,7 +11,6 @@ import SearchMobile from "./SearchMobile";
 import { useState, useEffect } from "react";
 import { useSearchContext } from "../../../Context/SearchContext";
 import LinearProgress from "@mui/material/LinearProgress";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const Search = () => {
   const [show, setShow] = useState(true);
@@ -25,7 +24,9 @@ const Search = () => {
   const {
     handleRequestForSeach,
     returnSearchResults,
+    handleScreenSizeSearch,
     searchHandle,
+    isInLargeScreen,
     isLoading,
   } = useSearchContext();
 
@@ -40,6 +41,7 @@ const Search = () => {
                 <Input
                   onChange={(event) => {
                     handleRequestForSeach(event);
+                    handleScreenSizeSearch("search");
                   }}
                   type="text"
                   placeholder="دنبال چه محصولی هستید ؟"
@@ -58,7 +60,7 @@ const Search = () => {
           </Div>
         </GridImages>
 
-        {searchHandle.length ? (
+        {isInLargeScreen && searchHandle.length ? (
           <Grid
             container
             alignItems={"center"}
@@ -102,10 +104,17 @@ const Search = () => {
               </>
             ) : (
               <>
-                <Typography sx={{ fontFamily: "unset",textAlign:"center",margin:"auto",fontSize:".9em" }}>
+                <Typography
+                  sx={{
+                    fontFamily: "unset",
+                    textAlign: "center",
+                    margin: "auto",
+                    fontSize: ".9em",
+                  }}
+                >
                   نتایج سرچ محصولات
                 </Typography>
-                <Divider sx={{width:"100%",margin:"15px 0"}} />
+                <Divider sx={{ width: "100%", margin: "15px 0" }} />
                 {returnSearchResults()}
               </>
             )}

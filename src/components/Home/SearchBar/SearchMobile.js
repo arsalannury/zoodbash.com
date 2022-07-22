@@ -61,7 +61,7 @@ const SearchMobile = () => {
           />
         </SearchBar>
 
-        {isInSmallScreen && searchHandle.length ? (
+        {isInSmallScreen ? (
           <Grid
             container
             alignItems={"center"}

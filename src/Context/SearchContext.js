@@ -25,7 +25,6 @@ const SearchContextProvider = ({ children }) => {
       setLageScrren(false);
     }
   };
-
   const handleRequestForSeach = async (event) => {
     if (event.target.value.trim().length === 0 || !event.target.value) {
       setSearchHandle([]);
@@ -38,6 +37,7 @@ const SearchContextProvider = ({ children }) => {
         "https://fakestoreapi.com/products"
       );
       const isFetch = searchResponse.data;
+      if(event.target.value.trim().length === 0 || !event.target.value) return;
       setSearchHandle(() => {
         return isFetch.filter((item) => {
           return item.title.toLowerCase().includes(event.target.value);

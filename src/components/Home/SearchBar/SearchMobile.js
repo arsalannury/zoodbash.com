@@ -13,13 +13,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 
 const SearchMobile = () => {
   const [open, setOpen] = useState(false);
-  const handleClose = (e) => {
-    if (e.target.nodeName === "INPUT") return;
-    setOpen(false);
-  };
-  const handleToggle = () => {
-    setOpen(!open);
-  };
+  const [emptyInput, setEmptyInput] = useState("");
 
   const {
     handleRequestForSeach,
@@ -28,7 +22,18 @@ const SearchMobile = () => {
     isInSmallScreen,
     searchHandle,
     isLoading,
+    changeSearch,
   } = useSearchContext();
+
+  const handleClose = (e) => {
+    if (e.target.nodeName === "INPUT") return;
+    setOpen(false);
+    setEmptyInput("");
+    changeSearch();
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
   return (
     <>
@@ -52,7 +57,9 @@ const SearchMobile = () => {
         <SearchBar>
           <Icon />
           <Input
+            value={emptyInput}
             onChange={(event) => {
+              setEmptyInput(event.target.value);
               handleRequestForSeach(event);
               handleScreenSizeSearch("searchMobile");
             }}
@@ -107,7 +114,7 @@ const SearchMobile = () => {
                     textAlign: "center",
                     margin: "auto",
                     fontSize: ".9em",
-                    color: "#000"
+                    color: "#000",
                   }}
                 >
                   نتایج سرچ محصولات

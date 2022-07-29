@@ -16,6 +16,10 @@ const SearchContextProvider = ({ children }) => {
   const [isInLargeScreen, setLageScrren] = useState(false);
   const [componentName, setcomponentName] = useState(null);
 
+  const changeSearch = () => {
+    return setSearchHandle([]);
+  };
+
   const handleScreenSizeSearch = (componentName) => {
     if (componentName === "search") {
       setLageScrren(true);
@@ -37,7 +41,7 @@ const SearchContextProvider = ({ children }) => {
         "https://fakestoreapi.com/products"
       );
       const isFetch = searchResponse.data;
-      if(event.target.value.trim().length === 0 || !event.target.value) return;
+      if (event.target.value.trim().length === 0 || !event.target.value) return;
       setSearchHandle(() => {
         return isFetch.filter((item) => {
           return item.title.toLowerCase().includes(event.target.value);
@@ -83,6 +87,7 @@ const SearchContextProvider = ({ children }) => {
         isInSmallScreen,
         isInLargeScreen,
         isLoading,
+        changeSearch,
       }}
     >
       {children}
